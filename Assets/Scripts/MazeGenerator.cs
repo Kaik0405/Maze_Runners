@@ -7,13 +7,19 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
 {
+    public GameObject WallObjectScene;
+    public GameObject PathObjectScene;
+
+    public static GameObject WallObject;
+    public static GameObject PathObject;
+
     const int Width = 9;
     const int Heigth = 7;
 
     const int wall = 0; //representa una pared
     const int path = 1; //representa un camino
 
-    int[,] Maze = new int[Heigth + 2, Width + 2];
+    public static int[,] Maze = new int[Heigth + 2, Width + 2];
     struct Cells
     {
         public int x, y;
@@ -25,7 +31,7 @@ public class MazeGenerator : MonoBehaviour
     }
     bool IsInBounds(int x, int y) // Metodo para verificar si una celda esta en una posicion valida de la matriz
     {
-        return x > 0 && x < Width + 1 && y > 0 && y < Heigth + 1; // Ajusta los límites
+        return x >= 0 && x < Maze.GetLength(0) && y >= 0 && y < Maze.GetLength(1); // Ajusta los límites
     }
     void Shuffle(Cells[] directions) //Selecciona las celdas en el Radio 2 de la celda actual y las mezcla de forma aleatoria 
     {
@@ -79,13 +85,7 @@ public class MazeGenerator : MonoBehaviour
     void Awake()
     {
         GenerateMaze(1, 1);
-
-        for(int i = 0; i < Maze.GetLength(0); i++)
-        {
-            for(int j = 0; j < Maze.GetLength(1); j++)
-            {
-                //type code here....
-            }
-        }
+        WallObject = WallObjectScene;
+        PathObject = PathObjectScene;
     }
 }
