@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Library\\PackageCache\\com.unity.ugui@1.0.0\\Editor\\UI\\GraphicEditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.ugui@1.0.0\\Editor\\UI\\GraphicEditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\MenuControler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\MenuControler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\AddCell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\AddCell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\MazeGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\MazeGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\Cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Scripts\\Cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,20 +30,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GraphicEditor.cs",
-              "DocumentMoniker": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Library\\PackageCache\\com.unity.ugui@1.0.0\\Editor\\UI\\GraphicEditor.cs",
-              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.ugui@1.0.0\\Editor\\UI\\GraphicEditor.cs",
-              "ToolTip": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Library\\PackageCache\\com.unity.ugui@1.0.0\\Editor\\UI\\GraphicEditor.cs",
-              "RelativeToolTip": "Library\\PackageCache\\com.unity.ugui@1.0.0\\Editor\\UI\\GraphicEditor.cs",
-              "ViewState": "AQIAAIwAAAAAAAAAAAAAAJcAAAAzAAAA",
+              "DocumentIndex": 1,
+              "Title": "AddCell.cs",
+              "DocumentMoniker": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\AddCell.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AddCell.cs",
+              "ToolTip": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\AddCell.cs",
+              "RelativeToolTip": "Assets\\Scripts\\AddCell.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvw8AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T22:38:08.532Z",
+              "WhenOpened": "2024-11-02T23:17:40.881Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MenuControler.cs",
+              "DocumentMoniker": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\MenuControler.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MenuControler.cs",
+              "ToolTip": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\MenuControler.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MenuControler.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-02T17:56:58.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MazeGenerator.cs",
+              "DocumentMoniker": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\MazeGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MazeGenerator.cs",
+              "ToolTip": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\MazeGenerator.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MazeGenerator.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAAACMAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-31T13:29:43.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\GameManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager.cs",
+              "ToolTip": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\GameManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\GameManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-02T21:08:31.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Cell.cs",
+              "DocumentMoniker": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\Cell.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Cell.cs",
+              "ToolTip": "D:\\Cibern\u00E9tica\\4 - Programacion\\Proyectos\\Maze_Runners\\Assets\\Scripts\\Cell.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Cell.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwcAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-31T13:25:41.667Z"
             }
           ]
         }

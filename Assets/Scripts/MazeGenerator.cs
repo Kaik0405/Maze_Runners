@@ -3,23 +3,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine.UI;
+using Unity.VisualScripting;
 using UnityEngine;
+using System.Security;
 
 public class MazeGenerator : MonoBehaviour
 {
-    public GameObject WallObjectScene;
-    public GameObject PathObjectScene;
-
-    public static GameObject WallObject;
-    public static GameObject PathObject;
-
-    const int Width = 9;
-    const int Heigth = 7;
-
-    const int wall = 0; //representa una pared
-    const int path = 1; //representa un camino
-
-    public static int[,] Maze = new int[Heigth + 2, Width + 2];
+    public GameObject CellObjectScene;
+    GameObject CellObject;
+    Image CellImage;
+    const int Width = 19;
+    const int Height = 15;
+    const bool Wall = true; //representa una pared
+    const bool Path = false; //representa un camino
+    public static Cell[,] Maze = new Cell[Height + 2, Width + 2]; 
     struct Cells
     {
         public int x, y;
@@ -29,9 +27,23 @@ public class MazeGenerator : MonoBehaviour
             this.y = y;
         }
     }
-    bool IsInBounds(int x, int y) // Metodo para verificar si una celda esta en una posicion valida de la matriz
+    void Awake()
     {
-        return x >= 0 && x < Maze.GetLength(0) && y >= 0 && y < Maze.GetLength(1); // Ajusta los l韒ites
+        CreateMatrix();
+        GenerateMaze(1, 1);
+        CellObject = CellObjectScene;
+        CellImage = CellObject.GetComponent<Image>();
+        GenerateMazeInScene();
+    }
+    void CreateMatrix()
+    {
+        for (int i = 0;i<Maze.GetLength(0);i++)
+            for (int j = 0;j<Maze.GetLength(1);j++)    
+                Maze[i,j] = new Cell(Wall);        
+    }    
+    bool IsInBounds(int x, int y) // M茅todo para verificar si una celda esta en una posici贸n valida de la matriz
+    {
+        return x >= 0 && x < Maze.GetLength(0) && y >= 0 && y < Maze.GetLength(1); // Ajusta los limites
     }
     void Shuffle(Cells[] directions) //Selecciona las celdas en el Radio 2 de la celda actual y las mezcla de forma aleatoria 
     {
@@ -46,7 +58,8 @@ public class MazeGenerator : MonoBehaviour
     }
     void GenerateMaze(int x,int y) // Algoritmo recursivo para generar el laberinto
     {
-        Maze[x, y] = path;
+        Maze[x, y].Obstacle = Path;
+
         Cells[] directions = new Cells[]
         {
             new Cells(0, 2), 
@@ -62,30 +75,67 @@ public class MazeGenerator : MonoBehaviour
             int newX = x + direction.x;
             int newY = y + direction.y;
 
-            if (IsInBounds(newX, newY) && Maze[newX, newY] == wall) // Verifica si la direccion a la que se movio es valida y si es una pared
+            if (IsInBounds(newX, newY) && Maze[newX, newY].Obstacle == Wall) // Verifica si la direcci贸n a la que se movi贸 es valida y si es una pared
             {
-                Maze[x + direction.x / 2, y + direction.y / 2] = path; // Elimina la pared del medio
+                Maze[x + direction.x / 2, y + direction.y / 2].Obstacle = Path; // Elimina la pared del medio
                 GenerateMaze(newX, newY);
             }
         }
     }
-    Cells LongestPath(int[,] maze,Stack<Cells> cellTeletransport) // codigo recursivo para determinar el camino mas largo del laberinto
+    bool Verification(int x, int y, int li, int lj) //Metodo para verificar si la matriz esta en rango
+    {
+        if (x < 0 || y < 0) return false;
+        if (x > li || y > lj) return false;
+
+        return true;
+    }
+    bool[,] CopyValues(bool[,] matrix)
+    {
+        for (int i = 0;i<matrix.GetLength(0);i++)        
+            for(int j = 0;j<matrix.GetLength(1);j++)
+                matrix[i,j] = Maze[i,j].Obstacle;
+
+        return matrix;    
+    }
+    Cells LongestPath(Cell[,] maze) // c贸digo recursivo para determinar el camino mas largo del laberinto
     {
         int max = 0;
-        Cells cellF = new Cells();
-
+        Cells cellF = new Cells(0,0);
+        bool[,] mazeAux = new bool[Maze.GetLength(0), Maze.GetLength(1)];
+        CopyValues(mazeAux);
         return cellF;
     } 
-    void LongestPath(int[,] maze,ref int max,ref Cells cellF,Stack<Cells> cellTeletransport) 
+    void LongestPath(bool[,] booleanMask,ref Cells cellF,ref int max,int currentMax = 0,int x = 1,int y = 1) 
     {
-        // type code here...
-        throw new NotImplementedException();
-    }
+        int[] dx = { 0, 1, 0, -1 };
+        int[] dy = { 1, 0, -1, 0 };
 
-    void Awake()
-    {
-        GenerateMaze(1, 1);
-        WallObject = WallObjectScene;
-        PathObject = PathObjectScene;
+        for(int s = 0;s < dx.Length;s++)
+        {
+            int sumX = x + dx[s];
+            int sumY = y + dy[s];
+
+            
+        }
     }
+    void GenerateMazeInScene()
+    {
+        for (int i = 0; i < Maze.GetLength(0); i++)
+        {
+            for (int j = 0; j < Maze.GetLength(1); j++)
+            {
+                if((Maze[i,j] != null)&&(Maze[i,j].Obstacle == true))
+                {
+                    CellImage.color = Color.grey;
+                    Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);    
+                }
+                else
+                {
+                    CellImage.color = Color.white;
+                    Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+                }
+            }
+        }
+    }
+    
 }

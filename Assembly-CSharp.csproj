@@ -64,10 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Token.cs" />
-    <Compile Include="Assets\Scripts\MenuControler.cs" />
     <Compile Include="Assets\Scripts\AddCell.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MazeGenerator.cs" />
+    <Compile Include="Assets\Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\Cell.cs" />
   </ItemGroup>
   <ItemGroup>

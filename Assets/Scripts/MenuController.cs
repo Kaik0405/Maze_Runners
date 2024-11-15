@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuControler : MonoBehaviour
+public class MenuController : MonoBehaviour
 {
     public GameObject Music;
     public void ChangeSceneWithDelay(string sceneName, float delay)
@@ -12,11 +12,11 @@ public class MenuControler : MonoBehaviour
         {
             Music.GetComponent<AudioSource>().Play();
         }
-        Invoke("TraslateToGame", delay);
+        Invoke("TranslateToGame", delay);
     }
-    public void TraslateToGame()
+    public void TranslateToGame()
     {
-        ChangeSceneWithDelay("TraslateToScene", 1.0f);
+        ChangeSceneWithDelay("TranslateToScene", 1.0f);
         DontDestroyOnLoad(Music);
         SceneManager.LoadSceneAsync("MazeRunnerGame");
     }
@@ -26,11 +26,11 @@ public class MenuControler : MonoBehaviour
         {
             Music.GetComponent<AudioSource>().Play();
         }
-        Invoke("TraslateToOptions",delay);
+        Invoke("TranslateToOptions",delay);
     }
-    public void TraslateToOptions()
+    public void TranslateToOptions()
     {
-        ChangeSceneWithDelayOptions("TraslateToScene", 1.0f);
+        ChangeSceneWithDelayOptions("TranslateToScene", 1.0f);
         DontDestroyOnLoad(Music);
         SceneManager.LoadSceneAsync("Options");
     }
@@ -40,11 +40,11 @@ public class MenuControler : MonoBehaviour
         {
             Music.GetComponent<AudioSource>().Play();
         }
-        Invoke("TraslateToTutorial", delay);
+        Invoke("TranslateToTutorial", delay);
     }
-    public void TraslateToTutorial()
+    public void TranslateToTutorial()
     {
-        ChangeSceneWithDelayTutorial("TraslateToScene", 1.0f);
+        ChangeSceneWithDelayTutorial("TranslateToScene", 1.0f);
         DontDestroyOnLoad(Music);
         SceneManager.LoadSceneAsync("Tutorial");
     }

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Cell
 {
-    Sprite image;
-    
+    public bool Obstacle{get;set;}
+    public bool Tramp{get;set;}
+    public bool cellTeleport{get;set;}
+    public bool Start{get;set;}
+    public bool FinishLine{get;set;}
+
+    public Cell(bool Obstacle)
+    {
+        this.Obstacle = Obstacle;  
+    } 
 }

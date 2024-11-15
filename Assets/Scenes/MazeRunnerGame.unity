@@ -330,8 +330,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 358, y: -14}
-  m_SizeDelta: {x: -817.07, y: -181.07}
+  m_AnchoredPosition: {x: 0, y: -7.6627197}
+  m_SizeDelta: {x: -816, y: -181.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351715116
 MonoBehaviour:
@@ -593,10 +593,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 52, y: 52}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -735,8 +735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1818575c9ba9fa4aaa57fd5e015ad93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallObjectScene: {fileID: 7294288706432127350, guid: 83dcea1b077721a4b996c82b618f7fd1, type: 3}
-  PathObjectScene: {fileID: 2959717351766933185, guid: 65b46ded282725a458ca9c46d7b2e3e2, type: 3}
+  CellObjectScene: {fileID: 5789734999331102028, guid: 0f611237ba423c941aab90f3963df01e, type: 3}
+  CellAuxScene: {fileID: 7294288706432127350, guid: 83dcea1b077721a4b996c82b618f7fd1, type: 3}
 --- !u!4 &1130028146
 Transform:
   m_ObjectHideFlags: 0
