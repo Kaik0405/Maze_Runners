@@ -206,8 +206,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1117544217}
-        m_TargetAssemblyTypeName: MenuControler, Assembly-CSharp
-        m_MethodName: TraslateToGame
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: TranslateToGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1264,8 +1264,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1117544217}
-        m_TargetAssemblyTypeName: MenuControler, Assembly-CSharp
-        m_MethodName: TraslateToTutorial
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: TranslateToTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1396,8 +1396,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1117544217}
-        m_TargetAssemblyTypeName: MenuControler, Assembly-CSharp
-        m_MethodName: TraslateToOptions
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: TranslateToOptions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

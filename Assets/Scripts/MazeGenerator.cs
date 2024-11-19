@@ -8,14 +8,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Security;
 using Unity.Mathematics;
+using System.Numerics;
 
 public class MazeGenerator : MonoBehaviour
 {
     public GameObject CellObjectScene;
     GameObject CellObject;
     Image CellImage;
-    const int Width = 19;
-    const int Height = 15;
+    const int Width = 13;
+    const int Height = 13;
     const bool Wall = true; //representa una pared
     const bool Path = false; //representa un camino
     public static Cell[,] Maze = new Cell[Height + 2, Width + 2]; 
@@ -32,10 +33,11 @@ public class MazeGenerator : MonoBehaviour
     {
         CreateMatrix();
         GenerateMaze(1, 1);
+        GenerateTeleports();
+        GenerateTramps();
         CellObject = CellObjectScene;
         CellImage = CellObject.GetComponent<Image>();
         GenerateMazeInScene();
-
     }
     private void CreateMatrix() //Metodo para generar una matriz de celdas clasificadas como obstaculos
     {
@@ -58,7 +60,7 @@ public class MazeGenerator : MonoBehaviour
             directions[j] = temp;
         }
     }
-    private void GenerateMaze(int x,int y) // Algoritmo recursivo para generar el laberinto
+    void GenerateMaze(int x,int y) // Algoritmo recursivo para generar el laberinto
     {
         Maze[x, y].Obstacle = Path;
 
@@ -99,7 +101,7 @@ public class MazeGenerator : MonoBehaviour
 
         return matrix;    
     }
-    private Cells LongestPath(Cell[,] maze) // código recursivo para determinar el camino mas largo del laberinto
+    Cells LongestPath(Cell[,] maze) // código recursivo para determinar el camino mas largo del laberinto
     {
         int max = 0;
         Cells cellF = new Cells(0,0);
@@ -137,7 +139,7 @@ public class MazeGenerator : MonoBehaviour
             cellF.y = y;
         }
     }
-    private void GenerateMazeInScene() //instanciacion en escena de las celdas del laberinto
+    void GenerateMazeInScene() //instanciacion en escena de las celdas del laberinto
     {
         Maze[1,1].Start = true;
         Cells finish = LongestPath(Maze);
@@ -163,19 +165,113 @@ public class MazeGenerator : MonoBehaviour
                     Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
                 }
                 else
-                {
-                    CellImage.color = Color.white;
+                {  
+                    if(Maze[i,j].cellTeleport)
+                        CellImage.color = Color.cyan;
+
+                    else if(Maze[i,j].Tramp)
+                        CellImage.color = Color.magenta;
+                        
+                    else
+                        CellImage.color = Color.white;
+
                     Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
                 }
             }
         }
     }
-    public void GenerateTramps() // metodo para generar las trampas de forma aleatoria
+    private TrampType GenerateTrampType() // metodo para generar un tipo de trampa aleatorio
     {
-        //type code here....
+        System.Random ranNumber = new System.Random();
+        int aleatory = ranNumber.Next(1,5);
+
+        switch (aleatory)
+        {
+            case 1:
+                return TrampType.Freeze;
+            case 2:
+                return TrampType.Sleep;
+            case 3:
+                return TrampType.Spines;
+            case 4:
+                return TrampType.returnInit;
+            default:
+                return TrampType.Unknown;        
+        }
     }
-    public void GenerateTeleports() // metodo para generar las zonas de teletransporte 
+    void GenerateTramps() // metodo para generar las trampas de forma aleatoria
     {
-        //type code here....
+        System.Random ranNumber = new System.Random();
+
+        for (int i = 0;i<Maze.GetLength(0);i++)
+        {
+            for (int j = 0;j<Maze.GetLength(1);j++)
+            {
+                if(!Maze[i,j].Obstacle && !Maze[i,j].cellTeleport) // Detecta si la posicion de la matriz no es un obtaculo
+                {
+                    int aleatory = ranNumber.Next(1,11);
+                    
+                    if(aleatory==4||aleatory==7) // frecuencia de generacion de trampas 20%
+                    {
+                        Maze[i,j].Tramp = true;
+                        Maze[i,j].trampType = GenerateTrampType(); //Asigna un enum aleatorio del tipo de trampa
+                    }
+                }
+
+            }
+        }
+    }
+    private void AsignateTeleportZone(List<Cells> zonesTeleport)
+    {
+        foreach(Cells item in zonesTeleport){
+            Maze[item.x,item.y].cellTeleport = true;
+            Debug.Log("["+item.x + ", " + item.y+"]");
+        }
+    }
+    void GenerateTeleports() // metodo para generar las zonas de teletransporte 
+    {
+        List<Cells> zonesTeleport = new List<Cells>();
+        bool[,] mazeAux = new bool[Maze.GetLength(0),Maze.GetLength(1)];
+        CopyValues(mazeAux);
+        Cells finishCell = LongestPath(Maze);
+        GenerateTeleports(mazeAux,zonesTeleport,finishCell);
+        AsignateTeleportZone(zonesTeleport);
+    }
+    private void GenerateTeleports(bool[,] booleanMask,List<Cells> zonesTeleport,Cells cellFinish)
+    {
+        for(int i = 0; i < booleanMask.GetLength(0); i++)
+        {
+            for(int j = 0;j < booleanMask.GetLength(1); j++)
+            {
+                if(!booleanMask[i,j]&&NotExit(booleanMask,i,j))
+                {
+                    if((i==1&&j==1)||(i == cellFinish.x && j==cellFinish.y)) continue;
+                    
+                    else 
+                        zonesTeleport.Add(new Cells(i,j));
+                }
+            }
+        }
+    }
+    private bool NotExit(bool[,] booleanMask,int i,int j)
+    {
+        int[] dx = { 0, 1, 0, -1 };
+        int[] dy = { 1, 0, -1, 0 };
+        int count = 0;
+
+        for(int s = 0;s<dx.Length;s++)
+        {
+            int sumX = i + dx[s];
+            int sumY = j + dy[s];
+
+            if(Verification(sumX,sumY,booleanMask.GetLength(0)-1,booleanMask.GetLength(1)-1))
+            {
+                if(booleanMask[sumX,sumY])
+                    count++;
+            }  
+        }
+        if(count == 3) return true;
+
+        return false;
     }
 }
