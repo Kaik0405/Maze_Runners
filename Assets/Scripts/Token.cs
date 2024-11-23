@@ -8,5 +8,7 @@ public class Token
     string InfoHability;
     int Speed;
     int Cooldown;
-    //Delegado de la Habilidad... 
+    //Delegado de la Habilidad...
+    Sprite spriteToken;
+     
 }

@@ -64,9 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Token.cs" />
+    <Compile Include="Assets\Scripts\TokenSkill.cs" />
+    <Compile Include="Assets\Scripts\TramSkill.cs" />
+    <Compile Include="Assets\Scripts\TrampEffects.cs" />
     <Compile Include="Assets\Scripts\CellDisplay.cs" />
     <Compile Include="Assets\Scripts\AddCell.cs" />
     <Compile Include="Assets\Scripts\TokenDisplay.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MazeGenerator.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />

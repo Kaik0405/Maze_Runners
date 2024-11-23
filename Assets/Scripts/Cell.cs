@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cell:ScriptableObject
+public class Cell: ScriptableObject
 {
     public bool Obstacle{get;set;}
     public bool Tramp{get;set;}

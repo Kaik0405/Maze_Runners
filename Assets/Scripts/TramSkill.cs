@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellDisplay : MonoBehaviour
+public static class TramSkill
 {
-    public Cell cell;
-
     
+
+
+
+
 }

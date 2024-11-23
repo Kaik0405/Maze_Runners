@@ -199,7 +199,7 @@ public class MazeGenerator : MonoBehaviour
                 return TrampType.Unknown;        
         }
     }
-    void GenerateTramps() // metodo para generar las trampas de forma aleatoria
+    void GenerateTramps() // Metodo para generar las trampas de forma aleatoria
     {
         System.Random ranNumber = new System.Random();
 
@@ -209,9 +209,9 @@ public class MazeGenerator : MonoBehaviour
             {
                 if(!Maze[i,j].Obstacle && !Maze[i,j].cellTeleport) // Detecta si la posicion de la matriz no es un obtaculo
                 {
-                    int aleatory = ranNumber.Next(1,11);
+                    int aleatory = ranNumber.Next(1,101);
                     
-                    if(aleatory==4||aleatory==7) // frecuencia de generacion de trampas 20%
+                    if(Contains(aleatory)) 
                     {
                         Maze[i,j].Tramp = true;
                         Maze[i,j].trampType = GenerateTrampType(); //Asigna un enum aleatorio del tipo de trampa
@@ -221,14 +221,22 @@ public class MazeGenerator : MonoBehaviour
             }
         }
     }
-    private void AsignateTeleportZone(List<Cells> zonesTeleport)
+    private bool Contains(int num)
+    {
+        int[] numbers = {4,15,56,83,31,77,99,29,62,45}; // frecuencia de generacion de trampas 10%
+        
+        for(int i=0;i<numbers.Length;i++)
+            if(numbers[i] == num) return true;
+
+        return false;    
+    }
+    private void AsignateTeleportZone(List<Cells> zonesTeleport) //Metodo para asignar la propiedad de Zona de Teletransporte a la celda correspondiente
     {
         foreach(Cells item in zonesTeleport){
             Maze[item.x,item.y].cellTeleport = true;
-            Debug.Log("["+item.x + ", " + item.y+"]");
         }
     }
-    void GenerateTeleports() // metodo para generar las zonas de teletransporte 
+    void GenerateTeleports() // Metodo para generar las zonas de teletransporte 
     {
         List<Cells> zonesTeleport = new List<Cells>();
         bool[,] mazeAux = new bool[Maze.GetLength(0),Maze.GetLength(1)];
@@ -253,7 +261,7 @@ public class MazeGenerator : MonoBehaviour
             }
         }
     }
-    private bool NotExit(bool[,] booleanMask,int i,int j)
+    private bool NotExit(bool[,] booleanMask,int i,int j) //Metodo para verificar que la celda no tiene salida
     {
         int[] dx = { 0, 1, 0, -1 };
         int[] dy = { 1, 0, -1, 0 };

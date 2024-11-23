@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4889322076323366156}
   - component: {fileID: 5625062781723890060}
   - component: {fileID: 2180589510512355066}
+  - component: {fileID: -1457475175181981706}
   m_Layer: 5
   m_Name: Cell
   m_TagString: Untagged
@@ -89,3 +90,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AddMaze: {fileID: 5789734999331102028}
+--- !u!114 &-1457475175181981706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5789734999331102028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 60, y: 52}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
