@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 4676570529969442007}
   - component: {fileID: 8120569975491551008}
   - component: {fileID: 5643830666603680319}
+  - component: {fileID: 5840399040822442979}
+  - component: {fileID: -7705805475339245623}
+  - component: {fileID: 9192287488665744636}
   m_Layer: 5
   m_Name: Token
   m_TagString: Untagged
@@ -34,8 +37,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -140, y: 430}
-  m_SizeDelta: {x: 60, y: 52}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8120569975491551008
 CanvasRenderer:
@@ -58,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.123377435, g: 0.97735846, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -75,3 +78,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5840399040822442979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600870087958013630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de6a79aee2794b64fa9737be3de0a7d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Token: {fileID: 11400000, guid: 8097ff6149d8f474abe4000227484eee, type: 2}
+--- !u!114 &-7705805475339245623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600870087958013630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d093eee23b4753548872fbff6f2f444e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentToken: {fileID: 2600870087958013630}
+--- !u!114 &9192287488665744636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600870087958013630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02b5ccd55eb20c4493cffc4cdafb075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TokenAdd: {fileID: 2600870087958013630}

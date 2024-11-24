@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
-public static class TokenDisplay
+public class TokenDisplay : MonoBehaviour
 {
-    
+    public Token Token;
+    Sprite SpriteCell;
+    Image ImageCell;
 
 
 }

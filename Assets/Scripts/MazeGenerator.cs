@@ -20,6 +20,7 @@ public class MazeGenerator : MonoBehaviour
     const bool Wall = true; //representa una pared
     const bool Path = false; //representa un camino
     public static Cell[,] Maze = new Cell[Height + 2, Width + 2]; 
+    public static GameObject[,] gameObjects = new GameObject[Maze.GetLength(0),Maze.GetLength(1)] ;
     private struct Cells
     {
         public int x, y;
@@ -38,6 +39,7 @@ public class MazeGenerator : MonoBehaviour
         CellObject = CellObjectScene;
         CellImage = CellObject.GetComponent<Image>();
         GenerateMazeInScene();
+        AsiganateValuesToCellsScrips();
     }
     private void CreateMatrix() //Metodo para generar una matriz de celdas clasificadas como obstaculos
     {
@@ -152,17 +154,23 @@ public class MazeGenerator : MonoBehaviour
                 if(Maze[i,j].Obstacle == true)
                 {
                     CellImage.color = Color.grey;
-                    Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);    
+                    GameObject cellObjectReference = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+
+                    gameObjects[i,j] = cellObjectReference;    
                 }
                 else if(Maze[i,j].Start == true)
                 {
                     CellImage.color = Color.blue;
-                    Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+                    GameObject cellObjectReference = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+
+                    gameObjects[i,j] = cellObjectReference;
                 }
                 else if(Maze[i,j].FinishLine == true)
                 {
                     CellImage.color = Color.red;
-                    Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+                    GameObject cellObjectReference = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+
+                    gameObjects[i,j] = cellObjectReference;
                 }
                 else
                 {  
@@ -175,7 +183,7 @@ public class MazeGenerator : MonoBehaviour
                     else
                         CellImage.color = Color.white;
 
-                    Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+                    gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);            
                 }
             }
         }
@@ -281,5 +289,15 @@ public class MazeGenerator : MonoBehaviour
         if(count == 3) return true;
 
         return false;
+    }
+    private void AsiganateValuesToCellsScrips() //Metodo para asignarle a la matriz de referencia las propiedades de las celdas
+    {
+        for(int i = 0; i < Maze.GetLength(0); i++)
+        {
+            for (int j = 0; j < Maze.GetLength(1); j++)
+            {
+                gameObjects[i,j].GetComponent<CellDisplay>().cell = Maze[i,j];
+            }
+        }
     }
 }

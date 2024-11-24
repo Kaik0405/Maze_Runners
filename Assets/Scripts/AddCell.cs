@@ -7,7 +7,7 @@ public class AddCell : MonoBehaviour
     GameObject Maze;
     public GameObject AddMaze;
 
-    void Start()
+    void Start() //Define la posicion donde va a ser instanciada la celda
     {
         Maze = GameObject.Find("Maze");
         AddMaze.transform.SetParent(Maze.transform);

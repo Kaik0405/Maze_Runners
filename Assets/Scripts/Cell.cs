@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
+[CreateAssetMenu(fileName = "new Cell", menuName = "Cell")]
 public class Cell: ScriptableObject
 {
-    public bool Obstacle{get;set;}
-    public bool Tramp{get;set;}
-    public bool cellTeleport{get;set;}
-    public bool Start{get;set;}
-    public bool FinishLine{get;set;}
+    public bool Obstacle = true;
+    public bool Tramp = false;
+    public bool cellTeleport = false;
+    public bool Start = false;
+    public bool FinishLine = false;
     public TrampType trampType = TrampType.Unknown;
 
     public Cell(bool Obstacle)

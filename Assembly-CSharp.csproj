@@ -65,7 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Token.cs" />
     <Compile Include="Assets\Scripts\TokenSkill.cs" />
-    <Compile Include="Assets\Scripts\TramSkill.cs" />
+    <Compile Include="Assets\Scripts\AddToken.cs" />
+    <Compile Include="Assets\Scripts\TokenMove.cs" />
     <Compile Include="Assets\Scripts\TrampEffects.cs" />
     <Compile Include="Assets\Scripts\CellDisplay.cs" />
     <Compile Include="Assets\Scripts\AddCell.cs" />
