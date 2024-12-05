@@ -7,14 +7,24 @@ using UnityEngine.EventSystems;
 [CreateAssetMenu(fileName = "new Token", menuName = "Token")]
 public class Token : ScriptableObject
 {
-    string Name;
-    string InfoHability;
-    int Speed;
-    int Cooldown;
-    bool Available = false;
+    public string Name;
+    public string InfoHability;
+    public int Speed;
+    public int Cooldown;
+    public bool Available = false;
     public int PosX = 1;
     public int PosY = 1;
-    //Delegado de la Habilidad...
+    public delegate void TokenSkill(params object[] param);
+    public TokenSkill Skill { get; set;}
     Sprite spriteToken;
+
+    public Token(string name, string infoHability,int speed,int cooldown,TokenSkill skill)
+    {
+        Name = name;
+        InfoHability = infoHability;
+        Speed = speed;
+        Cooldown = cooldown;
+        Skill = skill;
+   }
      
 }

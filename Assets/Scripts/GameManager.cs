@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Xml.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,13 +12,14 @@ public class GameManager : MonoBehaviour
     public GameObject TonkenInScene;
     void Start()
     {
-          
+        
     }
-    public void InstantiateObjectIn() 
+    void EndTurn()
     {
-        Token = TonkenInScene; 
-        Token.GetComponent<TokenDisplay>().Token.PosX = 1;
-        Token.GetComponent<TokenDisplay>().Token.PosY = 1;
-        Instantiate(Token,MazeGenerator.gameObjects[1,1].transform.position,MazeGenerator.gameObjects[1,1].transform.rotation);       
+
+    }
+    void ChangeToken()
+    {
+        
     }
 }

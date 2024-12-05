@@ -18,7 +18,7 @@ public class MenuController : MonoBehaviour
     {
         ChangeSceneWithDelay("TranslateToScene", 1.0f);
         DontDestroyOnLoad(Music);
-        SceneManager.LoadSceneAsync("MazeRunnerGame");
+        SceneManager.LoadSceneAsync("TeamManager");
     }
     public void ChangeSceneWithDelayOptions(string sceneName,float delay)
     {
