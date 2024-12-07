@@ -5,21 +5,96 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 
 public class GameManager : MonoBehaviour
 {
-    GameObject Token;
     public GameObject TonkenInScene;
-    void Start()
+    public static GameObject StaticTokenInScene;
+    public GameObject PanelInScene;
+    public GameObject ChangeBotton;
+    public GameObject PanelSelect;
+    public static Player player1 = new Player("Player1",true,TeamManager.TeamsPlayer1);
+    public static Player player2 = new Player("Player2",false,TeamManager.TeamsPlayer2);
+    List<GameObject> BottonList = new List<GameObject>();
+    public static Player currentPlayer;
+    void Start()    
     {
-        
+        StaticTokenInScene = TonkenInScene;
+        player1.InstantiateTokens();
+        player2.InstantiateTokens();
+        currentPlayer = player1;
     }
-    void EndTurn()
+    public void EndTurn()
     {
+        ChangeBotton.SetActive(true);
+        player1.SwitchTurn();
+        player2.SwitchTurn();
+        if(player1.Turn) currentPlayer = player1;
+        else if(player2.Turn) currentPlayer = player2;
+    }
+    public void ChangeToken()
+    {
+        PanelInScene.SetActive(true);
+        
+        Player playerRef = new Player("PLayer",false,new List<Token>());
 
-    }
-    void ChangeToken()
-    {
+        if(player1.Turn) playerRef = player1;
+        else if(player2.Turn) playerRef = player2;    
         
+        for(int i = 0;i<playerRef.ObjectsInMaze.Count;i++)
+        {
+            GameObject buttonObject = new GameObject("Botton");
+            Button buttonComponent = buttonObject.AddComponent<Button>();
+            RectTransform rectTransform = buttonObject.AddComponent<RectTransform>();
+            TokenDisplay tokenDisplay = buttonObject.AddComponent<TokenDisplay>();
+            Image image = buttonComponent.AddComponent<Image>();
+
+            if(playerRef.Name == player1.Name)
+                image.color = Color.red;
+            else
+                image.color = Color.blue; 
+
+            buttonObject.transform.SetParent(PanelSelect.transform);
+            buttonObject.transform.position = PanelSelect.transform.position;
+            buttonObject.GetComponent<TokenDisplay>().Token = playerRef.ObjectsInMaze[i].GetComponent<TokenDisplay>().Token; 
+
+            buttonComponent.onClick.AddListener(()=>
+            {
+                if(!playerRef.CheckObjectsActive())
+                {
+                    foreach(GameObject item in playerRef.ObjectsInMaze)
+                        if(item.GetComponent<TokenDisplay>().Token.Name == buttonObject.GetComponent<TokenDisplay>().Token.Name)
+                        {
+                            item.SetActive(true);
+                            item.GetComponent<TokenDisplay>().Token.Available = true;
+                        }
+                }    
+                else if(playerRef.CheckObjectsActive())
+                {
+                    playerRef.DesactiveObject();
+                    
+                    foreach(GameObject item in playerRef.ObjectsInMaze)
+                        item.GetComponent<TokenDisplay>().Token.Available = false;
+
+                    foreach(GameObject item in playerRef.ObjectsInMaze)
+                        if(item.GetComponent<TokenDisplay>().Token.Name == buttonObject.GetComponent<TokenDisplay>().Token.Name)
+                        {
+                            item.SetActive(true);
+                            item.GetComponent<TokenDisplay>().Token.Available = true;
+                        }
+                }    
+            });
+            BottonList.Add(buttonObject);
+        }
+    }
+    public void Confirm(){
+        PanelInScene.SetActive(false);
+        ChangeBotton.SetActive(false);
+
+        foreach(var botton in BottonList)
+            Destroy(botton);
+
+        BottonList.Clear();    
     }
 }

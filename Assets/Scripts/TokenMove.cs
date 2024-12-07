@@ -14,28 +14,16 @@ public class TokenMove : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
-        {
-            Debug.Log("MOVIENDO ARRIBA");
             Displace(-1,0);
-        }
-
+        
         if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("MOVIENDO ABAJO");
             Displace(1,0);
-        }
 
         if (Input.GetKeyDown(KeyCode.D))
-        {
-            Debug.Log("MOVIENDO DERECHA");
             Displace(0,1);
-        }
 
         if (Input.GetKeyDown(KeyCode.A))
-        {
-            Debug.Log("MOVIENDO IZQUIERDA");
             Displace(0,-1);
-        }    
     }
     private void Displace(int x,int y) //Metoddo para efectuar el desplazamiento segun la tecla presionada
     {
@@ -46,7 +34,7 @@ public class TokenMove : MonoBehaviour
         int dX = currentPosX + x;
         int dY = currentPosY + y;
 
-        if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Obstacle == false)
+        if((MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Obstacle == false)&&CurrentToken.GetComponent<TokenDisplay>().Token.Available)
         {
             CurrentToken.transform.SetParent(MazeGenerator.gameObjects[dX,dY].transform); //Cambia el padre de la ficha a la celda a la que se desplazo
             CurrentToken.transform.position = MazeGenerator.gameObjects[dX,dY].transform.position; //Le Asigna los valores de posicion a la que se desplazo
