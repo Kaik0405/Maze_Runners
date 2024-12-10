@@ -9,11 +9,13 @@ public class Token : ScriptableObject
 {
     public string Name;
     public string InfoHability;
-    public int Speed;
-    public int Cooldown;
+    int Speed;
+    int Cooldown;
     public bool Available = false;
     public int PosX = 1;
     public int PosY = 1;
+    public int CurrentSpeed;
+    public int CurrentCooldown;
     public delegate void TokenSkill(params object[] param);
     public TokenSkill Skill { get; set;}
     Sprite spriteToken;
@@ -25,6 +27,9 @@ public class Token : ScriptableObject
         Speed = speed;
         Cooldown = cooldown;
         Skill = skill;
+        CurrentSpeed = speed;
+        CurrentCooldown = cooldown;
    }
-     
+   public int GetSpeed() => Speed;
+   public int GetCooldown() => Cooldown;  
 }

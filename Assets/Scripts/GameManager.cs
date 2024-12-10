@@ -14,10 +14,13 @@ public class GameManager : MonoBehaviour
     public GameObject PanelInScene;
     public GameObject ChangeBotton;
     public GameObject PanelSelect;
+    public GameObject EndTurnButton;
     public static Player player1 = new Player("Player1",true,TeamManager.TeamsPlayer1);
     public static Player player2 = new Player("Player2",false,TeamManager.TeamsPlayer2);
     List<GameObject> BottonList = new List<GameObject>();
     public static Player currentPlayer;
+    public static bool IsPress = false;
+
     void Start()    
     {
         StaticTokenInScene = TonkenInScene;
@@ -25,18 +28,31 @@ public class GameManager : MonoBehaviour
         player2.InstantiateTokens();
         currentPlayer = player1;
     }
+    void Update()
+    {
+        if (player1.TokensInFinishLine == player1.ObjectsInMaze.Count)
+        {
+            Debug.Log("Player 1 Win");
+            ChangeBotton.SetActive(false);
+            EndTurnButton.SetActive(false);
+        }
+    }
     public void EndTurn()
     {
+        IsPress = false;
         ChangeBotton.SetActive(true);
         player1.SwitchTurn();
         player2.SwitchTurn();
+        currentPlayer.ResetMoveDistance();
         if(player1.Turn) currentPlayer = player1;
         else if(player2.Turn) currentPlayer = player2;
     }
     public void ChangeToken()
     {
         PanelInScene.SetActive(true);
-        
+        EndTurnButton.SetActive(false);
+        ChangeBotton.SetActive(false);
+
         Player playerRef = new Player("PLayer",false,new List<Token>());
 
         if(player1.Turn) playerRef = player1;
@@ -90,11 +106,12 @@ public class GameManager : MonoBehaviour
     }
     public void Confirm(){
         PanelInScene.SetActive(false);
-        ChangeBotton.SetActive(false);
 
         foreach(var botton in BottonList)
             Destroy(botton);
 
-        BottonList.Clear();    
+        BottonList.Clear();
+        IsPress = true;
+        EndTurnButton.SetActive(true);    
     }
 }

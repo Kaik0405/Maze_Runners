@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     public string Name;
     public bool Turn = false;
-    int TokensInFinishLine;
+    public int TokensInFinishLine = 0;
     public List<Token> TokensList = new List<Token>();
     public List<GameObject> ObjectsInMaze = new List<GameObject>();
     public Player(string name,bool turn,List<Token> tokens)
@@ -68,5 +68,14 @@ public class Player : MonoBehaviour
     {
         foreach(var item in ObjectsInMaze)
             item.GetComponent<TokenDisplay>().Token.Available = false;
+    }
+    public void ResetMoveDistance()
+    {
+        foreach(var item in ObjectsInMaze)
+            item.GetComponent<TokenDisplay>().Token.CurrentSpeed = item.GetComponent<TokenDisplay>().Token.GetSpeed();   
+    }
+    public void AddTokentoEnd()
+    {
+        TokensInFinishLine++;
     }
 } 

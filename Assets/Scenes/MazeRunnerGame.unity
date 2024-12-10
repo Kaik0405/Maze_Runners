@@ -156,6 +156,7 @@ MonoBehaviour:
   PanelInScene: {fileID: 1092300201}
   ChangeBotton: {fileID: 381886408}
   PanelSelect: {fileID: 1601299649}
+  EndTurnButton: {fileID: 2093273167}
 --- !u!4 &134769156
 Transform:
   m_ObjectHideFlags: 0

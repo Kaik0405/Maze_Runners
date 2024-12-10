@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class TokenSkill
 {
-    public static void DetectTrampInRadius(params object[] param) //Detecta todas las trampas que hay en el radio de desplazamiento
+    public static void DestroyTrampInRadius(params object[] param) //Detecta todas las trampas que hay en el radio de desplazamiento
     {
 
     }
@@ -24,4 +24,10 @@ public static class TokenSkill
     {
 
     }
+    public static void SimultaneousMovement(params object[] param)//Mueve todas las fichas en el laberinto del jugador de forma simultanea
+    {
+
+    }
+    public static void XD(params object[] param)//Retrocede en un paso todas las fichas del adversario
+    {}
 }

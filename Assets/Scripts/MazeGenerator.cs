@@ -9,7 +9,17 @@ using UnityEngine;
 using System.Security;
 using Unity.Mathematics;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 
+public struct Cells
+    {
+        public int x, y;
+        public Cells(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
 public class MazeGenerator : MonoBehaviour
 {
     public GameObject CellObjectScene;
@@ -19,17 +29,10 @@ public class MazeGenerator : MonoBehaviour
     const int Height = 13;
     const bool Wall = true; //representa una pared
     const bool Path = false; //representa un camino
-    public static Cell[,] Maze = new Cell[Height + 2, Width + 2]; 
+    public static Cell[,] Maze = new Cell[Height + 2, Width + 2];
+    public static Cells cellEnd;
     public static GameObject[,] gameObjects = new GameObject[Maze.GetLength(0),Maze.GetLength(1)] ;
-    private struct Cells
-    {
-        public int x, y;
-        public Cells(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-    }
+    
     void Awake()
     {
         CreateMatrix();
@@ -145,6 +148,8 @@ public class MazeGenerator : MonoBehaviour
     {
         Maze[1,1].Start = true;
         Cells finish = LongestPath(Maze);
+        cellEnd = new Cells(finish.x,finish.y);
+
         Maze[finish.x,finish.y].FinishLine = true;
 
         for (int i = 0; i < Maze.GetLength(0); i++)
