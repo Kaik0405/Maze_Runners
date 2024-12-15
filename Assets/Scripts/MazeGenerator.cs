@@ -312,6 +312,11 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int j = 0; j < Maze.GetLength(1); j++)
             {
+                if(Maze[i,j].Tramp)
+                    Maze[i,j].AsignateTrampDelegate();
+                if(Maze[i,j].cellTeleport)
+                    Maze[i,j].AsignateTeleportDelegate();
+                        
                 gameObjects[i,j].GetComponent<CellDisplay>().cell = Maze[i,j];
             }
         }

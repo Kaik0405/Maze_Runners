@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class TokenMove : MonoBehaviour
 {
@@ -34,14 +35,26 @@ public class TokenMove : MonoBehaviour
         int dX = currentPosX + x;
         int dY = currentPosY + y;
 
-        if((MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Obstacle == false) && CurrentToken.GetComponent<TokenDisplay>().Token.Available && GameManager.IsPress && (CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed>0))
+        if((MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Obstacle == false) && CurrentToken.GetComponent<TokenDisplay>().Token.Available && GameManager.IsPress && (CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed>0)&&(!CurrentToken.GetComponent<TokenDisplay>().Token.Lock))
         {
             CurrentToken.transform.SetParent(MazeGenerator.gameObjects[dX,dY].transform); //Cambia el padre de la ficha a la celda a la que se desplazo
             CurrentToken.transform.position = MazeGenerator.gameObjects[dX,dY].transform.position; //Le Asigna los valores de posicion a la que se desplazo
+            
             CurrentToken.GetComponent<TokenDisplay>().Token.PosX = dX; //actualiza los valores de ubicacion en la matriz
             CurrentToken.GetComponent<TokenDisplay>().Token.PosY = dY;
+            CurrentToken.GetComponent<TokenDisplay>().Token.PrePosX = currentPosX;
+            CurrentToken.GetComponent<TokenDisplay>().Token.PrePosY = currentPosY;
+
             CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed--;
-            
+
+            if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp)
+            {
+                MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.trampEffect();
+                MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp = false;
+            }
+            if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.cellTeleport)
+                MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.trampEffect();
+
             if(dX == MazeGenerator.cellEnd.x && dY == MazeGenerator.cellEnd.y)
             {
                 GameManager.currentPlayer.AddTokentoEnd();

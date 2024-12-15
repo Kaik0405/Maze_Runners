@@ -7,17 +7,27 @@ public static class TokenSkill
 {
     public static void DestroyTrampInRadius(params object[] param) //Detecta todas las trampas que hay en el radio de desplazamiento
     {
-        Debug.Log("HABILIDAD ACTIVADA");
+        GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject();
+        int positionX = currentObject.GetComponent<TokenDisplay>().Token.PosX;
+        int positionY = currentObject.GetComponent<TokenDisplay>().Token.PosY;
+
+        int x = positionX-6, y = positionY-6;
+        int dx = positionX+7, dy = positionY+7;
+
+        for(int i = x; i < dx; i++)
+            for(int j = y; j < dy; j++)
+                if(Check(MazeGenerator.gameObjects,i,j))
+                    MazeGenerator.gameObjects[i,j].GetComponent<CellDisplay>().cell.Tramp = false;
+        
     }
     public static void IncreseSpeed(params object[] param) //Aumenta el desplazamiento en 3 
     {
-        GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject();
+        GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject(); //Referencia al objeto que se esta desplazando
         currentObject.GetComponent<TokenDisplay>().Token.CurrentSpeed+=3;
     }
     public static void SendTeleportZone(params object[] param)//Envia la ficha para una zona de Teletransporte aleatoria
     {
         GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject();
-        Debug.Log(currentObject.GetComponent<TokenDisplay>().Token.Name);
         
         System.Random random= new System.Random();
         int aleatory = random.Next(0, MazeGenerator.TeleportZones.Count);
@@ -35,20 +45,70 @@ public static class TokenSkill
     {
         GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject();
 
-        if(GameManager.currentPlayer == GameManager.player1)
+        if(GameManager.currentPlayer.Name == GameManager.player1.Name)
             AsignateValues(currentObject, GameManager.player2);
         
-        else
+        else if(GameManager.currentPlayer.Name == GameManager.player2.name)
             AsignateValues(currentObject, GameManager.player1);
         
     }  
     public static void AdversaryTokenInit(params object[] param)//Manda una ficha aleatoria del campo del adversario para el inicio
     {
-        
+        if(GameManager.currentPlayer.Name == GameManager.player1.Name)
+        {
+            System.Random random= new System.Random();
+            int aleatory = random.Next(0, GameManager.player2.ObjectsInMaze.Count);
+            GameObject objectAdversary = GameManager.player2.ObjectsInMaze[aleatory];
+
+            if(objectAdversary.activeInHierarchy)
+            {
+                objectAdversary.transform.SetParent(MazeGenerator.gameObjects[1,1].transform);
+                objectAdversary.transform.position = MazeGenerator.gameObjects[1,1].transform.position;
+                objectAdversary.GetComponent<TokenDisplay>().Token.PrePosX = objectAdversary.GetComponent<TokenDisplay>().Token.PosX;
+                objectAdversary.GetComponent<TokenDisplay>().Token.PrePosY = objectAdversary.GetComponent<TokenDisplay>().Token.PosY;
+                objectAdversary.GetComponent<TokenDisplay>().Token.PosX = 1;
+                objectAdversary.GetComponent<TokenDisplay>().Token.PosY = 1;
+            }       
+        }
+        else if(GameManager.currentPlayer.Name == GameManager.player2.Name)
+        {
+            System.Random random= new System.Random();
+            int aleatory = random.Next(0, GameManager.player1.ObjectsInMaze.Count);
+            GameObject objectAdversary = GameManager.player1.ObjectsInMaze[aleatory];
+
+            if(objectAdversary.activeInHierarchy)
+            {
+                objectAdversary.transform.SetParent(MazeGenerator.gameObjects[1,1].transform);
+                objectAdversary.transform.position = MazeGenerator.gameObjects[1,1].transform.position;
+                objectAdversary.GetComponent<TokenDisplay>().Token.PosX = 1;
+                objectAdversary.GetComponent<TokenDisplay>().Token.PosY = 1;
+            }  
+        }
     }
-    public static void MoveBackTokensAdv(params object[] param)//Retrocede en un paso todas las fichas del adversario
+    public static void MoveBackTokensAdv(params object[] param)//Hace que la fichas vuelvan a la posicion anterior
     {
-        Debug.Log("HABILIDAD ACTIVADA");
+        if(GameManager.currentPlayer.Name == GameManager.player1.Name)
+        {
+            foreach(var item in GameManager.player2.ObjectsInMaze)
+            {
+                TokenDisplay itemD = item.GetComponent<TokenDisplay>();
+                item.transform.SetParent(MazeGenerator.gameObjects[itemD.Token.PrePosX,itemD.Token.PrePosY].transform);
+                item.transform.position = MazeGenerator.gameObjects[itemD.Token.PrePosX,itemD.Token.PrePosY].transform.position;
+                itemD.Token.PosX = itemD.Token.PrePosX;
+                itemD.Token.PosY = itemD.Token.PrePosY;
+            }
+        }
+        else if(GameManager.currentPlayer.Name == GameManager.player2.Name)
+        {
+            foreach(var item in GameManager.player1.ObjectsInMaze)
+            {
+                TokenDisplay itemD = item.GetComponent<TokenDisplay>();
+                item.transform.SetParent(MazeGenerator.gameObjects[itemD.Token.PrePosX,itemD.Token.PrePosY].transform);
+                item.transform.position = MazeGenerator.gameObjects[itemD.Token.PrePosX,itemD.Token.PrePosY].transform.position;
+                itemD.Token.PosX = itemD.Token.PrePosX;
+                itemD.Token.PosY = itemD.Token.PrePosY;
+            }
+        }
     }
     private static void AsignateValues(GameObject currentObject, Player player)
     {
@@ -68,12 +128,23 @@ public static class TokenSkill
 
             currentObject.GetComponent<TokenDisplay>().Token.PosX = objectAdversary.GetComponent<TokenDisplay>().Token.PosX;
             currentObject.GetComponent<TokenDisplay>().Token.PosY = objectAdversary.GetComponent<TokenDisplay>().Token.PosY;
+            currentObject.GetComponent<TokenDisplay>().Token.PrePosX = currentObject.GetComponent<TokenDisplay>().Token.PosX;
+            currentObject.GetComponent<TokenDisplay>().Token.PrePosY = currentObject.GetComponent<TokenDisplay>().Token.PosY;
 
             objectAdversary.transform.SetParent(ParentObject);
             objectAdversary.transform.position = ParentObject.position;
 
+            objectAdversary.GetComponent<TokenDisplay>().Token.PrePosX = objectAdversary.GetComponent<TokenDisplay>().Token.PosX;
+            objectAdversary.GetComponent<TokenDisplay>().Token.PrePosY = objectAdversary.GetComponent<TokenDisplay>().Token.PosY;
             objectAdversary.GetComponent<TokenDisplay>().Token.PosX = x;
             objectAdversary.GetComponent<TokenDisplay>().Token.PosY = y;
         }
+    }
+    private static bool Check(GameObject[,] gameObjects,int x,int y)
+    {
+        if(x<0||y<0) return false;
+        if(x>=gameObjects.GetLength(0)||y>=gameObjects.GetLength(1)) return false;
+
+        return true;
     }
 }

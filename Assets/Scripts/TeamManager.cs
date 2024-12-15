@@ -29,7 +29,7 @@ public class TeamManager : MonoBehaviour
     }
     public void Ready()
     {
-        if(TeamsPlayer1.Count == TeamsPlayer2.Count)
+        if((TeamsPlayer1.Count == TeamsPlayer2.Count)&&(TeamsPlayer1.Count > 0))
         {
             ChangeSceneWithDelayReady("TranslateToScene", 1.0f);
             DontDestroyOnLoad(Music);   

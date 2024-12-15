@@ -81,15 +81,19 @@ public class Player : MonoBehaviour
     {
         TokensInFinishLine++;
     }
-    public void DecreaseCoolDown()
+    public void DecreaseCoolDown() //Metodo para la disminucion del cooldown de las habilidades
     {
         foreach(var item in ObjectsInMaze)
         {
             if(item.GetComponent<TokenDisplay>().Token.CurrentCooldown>0)
                 item.GetComponent<TokenDisplay>().Token.CurrentCooldown--;
+
+            if(item.GetComponent<TokenDisplay>().Token.Lock)
+                item.GetComponent<TokenDisplay>().Token.CurrentCountLock--;    
         }
+
     }
-    public bool IsAvaliable()
+    public bool IsAvaliable() //Metodo para comprobar si hay fichas desplazables
     {
         foreach (var item in ObjectsInMaze)
         {
@@ -98,7 +102,7 @@ public class Player : MonoBehaviour
         }
         return false;
     }
-    public GameObject CurrentTokenObject()
+    public GameObject CurrentTokenObject() //Metodo que devuelve la ficha actual
     {
         foreach (var item in ObjectsInMaze)
         {

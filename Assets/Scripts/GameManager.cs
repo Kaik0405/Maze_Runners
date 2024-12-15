@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private bool ExistWin = false;
     void Start()    
     {
+        currentPlayer = new Player("",false,TeamManager.TeamsPlayer1);
         StaticTokenInScene = TonkenInScene;
         player1.InstantiateTokens();
         player2.InstantiateTokens();

@@ -14,8 +14,13 @@ public class Token : ScriptableObject
     public bool Available = false;
     public int PosX = 1;
     public int PosY = 1;
+    public int PrePosX = 1; 
+    public int PrePosY = 1;
     public int CurrentSpeed;
     public int CurrentCooldown;
+    public bool Lock = false;
+    int CountLock = 3;
+    public int CurrentCountLock = 0;
     public delegate void TokenSkill(params object[] param);
     public TokenSkill Skill { get; set;}
     public Sprite SpriteToken;
@@ -35,5 +40,6 @@ public class Token : ScriptableObject
 
    }
    public int GetSpeed() => Speed;
-   public int GetCooldown() => Cooldown;  
+   public int GetCooldown() => Cooldown;
+   public int GetCountLock => CountLock;  
 }
