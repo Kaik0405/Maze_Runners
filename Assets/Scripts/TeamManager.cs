@@ -108,7 +108,7 @@ public class TeamManager : MonoBehaviour
             presset[8] = true;
         }
     }
-    public void AddEfman()
+    public void AddMystogan()
     {
         if(!presset[9])
         {

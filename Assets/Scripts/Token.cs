@@ -18,17 +18,21 @@ public class Token : ScriptableObject
     public int CurrentCooldown;
     public delegate void TokenSkill(params object[] param);
     public TokenSkill Skill { get; set;}
-    Sprite spriteToken;
-
-    public Token(string name, string infoHability,int speed,int cooldown,TokenSkill skill)
+    public Sprite SpriteToken;
+  
+    public Token(string name, string infoHability,int speed,int cooldown,TokenSkill skill,Sprite spriteToken)
     {
         Name = name;
         InfoHability = infoHability;
         Speed = speed;
         Cooldown = cooldown;
         Skill = skill;
+        SpriteToken = spriteToken;
         CurrentSpeed = speed;
-        CurrentCooldown = cooldown;
+        CurrentCooldown = 0;
+   }
+   public Token(){
+
    }
    public int GetSpeed() => Speed;
    public int GetCooldown() => Cooldown;  

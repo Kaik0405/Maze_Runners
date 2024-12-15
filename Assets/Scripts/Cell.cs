@@ -12,6 +12,8 @@ public class Cell: ScriptableObject
     public bool cellTeleport = false;
     public bool Start = false;
     public bool FinishLine = false;
+    public int PosX = 0;
+    public int PosY = 0;
     public TrampType trampType = TrampType.Unknown;
 
     public Cell(bool Obstacle)

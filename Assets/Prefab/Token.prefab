@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.123377435, g: 0.97735846, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Token: {fileID: 11400000, guid: 8097ff6149d8f474abe4000227484eee, type: 2}
+  SpriteToken: {fileID: 0}
+  ImageToken: {fileID: 5643830666603680319}
 --- !u!114 &-7705805475339245623
 MonoBehaviour:
   m_ObjectHideFlags: 0

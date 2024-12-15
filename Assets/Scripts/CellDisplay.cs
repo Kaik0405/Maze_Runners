@@ -8,6 +8,9 @@ public class CellDisplay : MonoBehaviour
     public Cell cell;
     Sprite SpriteCell;
     Image ImageCell;
-    
+    void Start()
+    {
+
+    }
     
 }

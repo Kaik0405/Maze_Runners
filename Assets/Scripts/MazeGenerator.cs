@@ -32,7 +32,7 @@ public class MazeGenerator : MonoBehaviour
     public static Cell[,] Maze = new Cell[Height + 2, Width + 2];
     public static Cells cellEnd;
     public static GameObject[,] gameObjects = new GameObject[Maze.GetLength(0),Maze.GetLength(1)] ;
-    
+    public static List<GameObject> TeleportZones = new List<GameObject>();
     void Awake()
     {
         CreateMatrix();
@@ -156,6 +156,9 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int j = 0; j < Maze.GetLength(1); j++)
             {
+                Maze[i,j].PosX = i;
+                Maze[i,j].PosY = j;
+                
                 if(Maze[i,j].Obstacle == true)
                 {
                     CellImage.color = Color.grey;
@@ -180,15 +183,23 @@ public class MazeGenerator : MonoBehaviour
                 else
                 {  
                     if(Maze[i,j].cellTeleport)
+                    {
                         CellImage.color = Color.cyan;
+                        gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+                        TeleportZones.Add(gameObjects[i,j]);
+                    }
 
                     else if(Maze[i,j].Tramp)
+                    {
                         CellImage.color = Color.magenta;
-                        
+                        gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+                    }
                     else
+                    {
                         CellImage.color = Color.white;
-
-                    gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);            
+                        gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
+                    }
+                                
                 }
             }
         }
@@ -305,4 +316,5 @@ public class MazeGenerator : MonoBehaviour
             }
         }
     }
+    
 }
