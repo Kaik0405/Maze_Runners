@@ -24,8 +24,10 @@ public class Token : ScriptableObject
     public delegate void TokenSkill(params object[] param);
     public TokenSkill Skill { get; set;}
     public Sprite SpriteToken;
+    public Sprite SpriteTokenSelect;
+    public Sprite SpriteTokenFull;
   
-    public Token(string name, string infoHability,int speed,int cooldown,TokenSkill skill,Sprite spriteToken)
+    public Token(string name, string infoHability,int speed,int cooldown,TokenSkill skill,Sprite spriteToken,Sprite spriteTokenSelect,Sprite spriteTokenFull)
     {
         Name = name;
         InfoHability = infoHability;
@@ -33,6 +35,8 @@ public class Token : ScriptableObject
         Cooldown = cooldown;
         Skill = skill;
         SpriteToken = spriteToken;
+        SpriteTokenSelect = spriteTokenSelect;
+        SpriteTokenFull = spriteTokenFull;
         CurrentSpeed = speed;
         CurrentCooldown = 0;
    }
@@ -41,5 +45,5 @@ public class Token : ScriptableObject
    }
    public int GetSpeed() => Speed;
    public int GetCooldown() => Cooldown;
-   public int GetCountLock => CountLock;  
+   public int GetCountLock() => CountLock;  
 }

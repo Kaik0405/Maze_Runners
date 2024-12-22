@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using static Token;
+using Unity.VisualScripting;
 
 public class TokenDisplay : MonoBehaviour
 {
@@ -16,5 +17,12 @@ public class TokenDisplay : MonoBehaviour
     {
         SpriteToken = Token.SpriteToken;
         ImageToken.sprite = SpriteToken;
+    }
+    void Update()
+    {
+        if(Token.CurrentCountLock == 0)
+        {
+            Token.Lock = false;
+        }
     }
 }

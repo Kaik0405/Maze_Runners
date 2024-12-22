@@ -25,7 +25,7 @@ public static class TrampEffects
     {
         GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject();
         currentObject.GetComponent<TokenDisplay>().Token.Lock = true;
-        currentObject.GetComponent<TokenDisplay>().Token.CurrentCountLock = currentObject.GetComponent<TokenDisplay>().Token.GetCountLock; 
+        currentObject.GetComponent<TokenDisplay>().Token.CurrentCountLock = currentObject.GetComponent<TokenDisplay>().Token.GetCountLock(); 
            
     }
     public static void Spines(params object[] param) //Hace que la ficha se mueva la mitad de los pasos restantes

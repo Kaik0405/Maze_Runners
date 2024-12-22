@@ -23,7 +23,7 @@ public static class TokenSkill
     public static void IncreseSpeed(params object[] param) //Aumenta el desplazamiento en 3 
     {
         GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject(); //Referencia al objeto que se esta desplazando
-        currentObject.GetComponent<TokenDisplay>().Token.CurrentSpeed+=3;
+        currentObject.GetComponent<TokenDisplay>().Token.CurrentSpeed+=5;
     }
     public static void SendTeleportZone(params object[] param)//Envia la ficha para una zona de Teletransporte aleatoria
     {

@@ -42,6 +42,7 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer1.Add(DataBaseTokens.Character[0]);
             presset[0] = true;
+            AsiganteImage(DataBaseTokens.Character[0]);
         }
     }
     public void AddLucy()
@@ -50,6 +51,7 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer1.Add(DataBaseTokens.Character[1]);
             presset[1] = true;
+            AsiganteImage(DataBaseTokens.Character[1]);
         }
     }
     public void AddGray()
@@ -58,6 +60,7 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer1.Add(DataBaseTokens.Character[2]);
             presset[2] = true;
+            AsiganteImage(DataBaseTokens.Character[2]);
         }
     }
     public void AddErza()
@@ -66,6 +69,7 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer1.Add(DataBaseTokens.Character[3]);
             presset[3] = true;
+            AsiganteImage(DataBaseTokens.Character[3]);
         }
     }
     public void AddWendy()
@@ -74,6 +78,7 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer1.Add(DataBaseTokens.Character[4]);
             presset[4] = true;
+            AsiganteImage(DataBaseTokens.Character[4]);
         }
     }
     public void AddLaxus()
@@ -82,6 +87,7 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer2.Add(DataBaseTokens.Character[5]);
             presset[5] = true;
+            AsiganteImage(DataBaseTokens.Character[5]);
         }
     }
     public void AddMirajane()
@@ -90,6 +96,7 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer2.Add(DataBaseTokens.Character[6]);
             presset[6] = true;
+            AsiganteImage(DataBaseTokens.Character[6]);
         }
     }
     public void AddGajeel()
@@ -98,6 +105,7 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer2.Add(DataBaseTokens.Character[7]);
             presset[7] = true;
+            AsiganteImage(DataBaseTokens.Character[7]);
         }
     }
     public void AddJuvia()
@@ -106,6 +114,7 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer2.Add(DataBaseTokens.Character[8]);
             presset[8] = true;
+            AsiganteImage(DataBaseTokens.Character[8]);
         }
     }
     public void AddMystogan()
@@ -114,7 +123,13 @@ public class TeamManager : MonoBehaviour
         {
             TeamsPlayer2.Add(DataBaseTokens.Character[9]);
             presset[9] = true;
+            AsiganteImage(DataBaseTokens.Character[9]);
         }
     }
-     
+    private void AsiganteImage(Token token)
+    {
+        GameObject button = GameObject.Find(token.Name);
+        Image image = button.GetComponent<Image>();
+        image.sprite = token.SpriteTokenSelect;
+    }
 }
