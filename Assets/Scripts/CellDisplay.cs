@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CellDisplay : MonoBehaviour
 {
     public Cell cell;
-    Sprite SpriteCell;
     Image ImageCell;
-    void Start()
+    void Update()
     {
-
     }
     
 }

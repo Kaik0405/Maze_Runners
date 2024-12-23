@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
+using UnityEditorInternal;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject PanelSelect; // Referencia a el panel de seleccion organizacion
     public GameObject EndTurnButton; // Referencia a el boton de terminar turno
     public GameObject ActivateSkillButton; // Referencia a el boton de activar habilidad
+    public GameObject SoundObject; //Referencia al Objeto de sonido
     public static Player player1 = new Player("Player1",true,TeamManager.TeamsPlayer1); // Instanciacion del jugador1 
     public static Player player2 = new Player("Player2",false,TeamManager.TeamsPlayer2); // Instanciacion del jugador2 
     List<GameObject> BottonList = new List<GameObject>(); // Lista de botones que se generan en la escena
@@ -57,6 +60,8 @@ public class GameManager : MonoBehaviour
     }
     public void EndTurn() // Metodo boton para el cambio de turno
     {
+        SoundObject.GetComponent<AudioSource>().Play();
+        
         IsPress = false;
         ChangeBotton.SetActive(true);
         player1.SwitchTurn();
@@ -77,10 +82,11 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeToken() // Metodo para el boton de cambio y seleccion de token
     {
+        SoundObject.GetComponent<AudioSource>().Play();
+
         PanelInScene.SetActive(true);
         EndTurnButton.SetActive(false);
         ChangeBotton.SetActive(false);
-
 
         Player playerRef = new Player("PLayer",false,new List<Token>());
 
@@ -99,10 +105,21 @@ public class GameManager : MonoBehaviour
             buttonObject.transform.position = PanelSelect.transform.position;
             buttonObject.GetComponent<TokenDisplay>().Token = playerRef.ObjectsInMaze[i].GetComponent<TokenDisplay>().Token; 
 
-            image.sprite = playerRef.ObjectsInMaze[i].GetComponent<TokenDisplay>().Token.SpriteToken;
+            image.sprite = playerRef.ObjectsInMaze[i].GetComponent<TokenDisplay>().Token.SpriteTokenNormal;
+
+            Button button = buttonObject.GetComponent<Button>();
+            button.transition = Selectable.Transition.SpriteSwap;
+            button.targetGraphic = buttonObject.GetComponent<Image>();
+
+            SpriteState spriteState = new SpriteState(); 
+            spriteState.highlightedSprite = playerRef.ObjectsInMaze[i].GetComponent<TokenDisplay>().Token.SpriteTokenSelect; 
+            spriteState.selectedSprite = playerRef.ObjectsInMaze[i].GetComponent<TokenDisplay>().Token.SpriteTokenSelect;
+            buttonComponent.spriteState = spriteState;   
 
             buttonComponent.onClick.AddListener(()=>
             {
+                SoundObject.GetComponent<AudioSource>().Play();
+                
                 if(!playerRef.CheckObjectsActive())
                 {
                     foreach(GameObject item in playerRef.ObjectsInMaze)
@@ -136,6 +153,8 @@ public class GameManager : MonoBehaviour
     }
     public void Confirm() // Metodo del boton de confirmar en el panel de seleccion
     {
+        SoundObject.GetComponent<AudioSource>().Play();
+
         PanelInScene.SetActive(false);
 
         foreach(var botton in BottonList)
@@ -149,10 +168,26 @@ public class GameManager : MonoBehaviour
     }
     public void ActivateSkillToken() //Metodo para activar la habilidad de la ficha
     {
+        SoundObject.GetComponent<AudioSource>().Play();
+
         GameObject currentToken = currentPlayer.CurrentTokenObject();
         currentToken.GetComponent<TokenDisplay>().Token.Skill();
         ActivateSkillButton.SetActive(false);
         currentToken.GetComponent<TokenDisplay>().Token.CurrentCooldown = currentToken.GetComponent<TokenDisplay>().Token.GetCooldown();
         SkillAvaliable = false; 
+    }
+    public void BackToMenu()
+    {
+        ChangeSceneWithDelay("TranslateToScene", 1.0f);
+        DontDestroyOnLoad(SoundObject);
+        SceneManager.LoadSceneAsync("Main Menu");
+    }
+    public void ChangeSceneWithDelay(string sceneName, float delay)
+    {
+        if (SoundObject.GetComponent<AudioSource>() != null)
+        {
+            SoundObject.GetComponent<AudioSource>().Play();
+        }
+        Invoke("BackToMenu", delay);
     }
 }

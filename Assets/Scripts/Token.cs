@@ -24,10 +24,11 @@ public class Token : ScriptableObject
     public delegate void TokenSkill(params object[] param);
     public TokenSkill Skill { get; set;}
     public Sprite SpriteToken;
+    public Sprite SpriteTokenNormal;
     public Sprite SpriteTokenSelect;
     public Sprite SpriteTokenFull;
   
-    public Token(string name, string infoHability,int speed,int cooldown,TokenSkill skill,Sprite spriteToken,Sprite spriteTokenSelect,Sprite spriteTokenFull)
+    public Token(string name, string infoHability,int speed,int cooldown,TokenSkill skill,Sprite spriteToken,Sprite spriteTokenSelect,Sprite spriteTokenFull,Sprite spriteTokenNormal)
     {
         Name = name;
         InfoHability = infoHability;
@@ -37,6 +38,7 @@ public class Token : ScriptableObject
         SpriteToken = spriteToken;
         SpriteTokenSelect = spriteTokenSelect;
         SpriteTokenFull = spriteTokenFull;
+        SpriteTokenNormal = spriteTokenNormal;
         CurrentSpeed = speed;
         CurrentCooldown = 0;
    }

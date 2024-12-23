@@ -15,7 +15,7 @@ public class TokenDisplay : MonoBehaviour
 
     public void Asignate()
     {
-        SpriteToken = Token.SpriteToken;
+        SpriteToken = Token.SpriteTokenSelect;
         ImageToken.sprite = SpriteToken;
     }
     void Update()

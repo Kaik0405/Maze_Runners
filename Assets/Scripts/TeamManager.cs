@@ -9,6 +9,7 @@ public class TeamManager : MonoBehaviour
     public static List<Token> TeamsPlayer1 = new List<Token>();
     public static List<Token> TeamsPlayer2 = new List<Token>();
     public GameObject Music;
+    public GameObject SoundObject;
     bool[] presset = {false, false, false, false, false, false, false, false, false, false};
     void Start()
     {
@@ -40,6 +41,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[0])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer1.Add(DataBaseTokens.Character[0]);
             presset[0] = true;
             AsiganteImage(DataBaseTokens.Character[0]);
@@ -49,6 +51,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[1])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer1.Add(DataBaseTokens.Character[1]);
             presset[1] = true;
             AsiganteImage(DataBaseTokens.Character[1]);
@@ -58,6 +61,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[2])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer1.Add(DataBaseTokens.Character[2]);
             presset[2] = true;
             AsiganteImage(DataBaseTokens.Character[2]);
@@ -67,6 +71,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[3])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer1.Add(DataBaseTokens.Character[3]);
             presset[3] = true;
             AsiganteImage(DataBaseTokens.Character[3]);
@@ -76,6 +81,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[4])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer1.Add(DataBaseTokens.Character[4]);
             presset[4] = true;
             AsiganteImage(DataBaseTokens.Character[4]);
@@ -85,6 +91,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[5])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer2.Add(DataBaseTokens.Character[5]);
             presset[5] = true;
             AsiganteImage(DataBaseTokens.Character[5]);
@@ -94,6 +101,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[6])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer2.Add(DataBaseTokens.Character[6]);
             presset[6] = true;
             AsiganteImage(DataBaseTokens.Character[6]);
@@ -103,6 +111,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[7])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer2.Add(DataBaseTokens.Character[7]);
             presset[7] = true;
             AsiganteImage(DataBaseTokens.Character[7]);
@@ -112,6 +121,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[8])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer2.Add(DataBaseTokens.Character[8]);
             presset[8] = true;
             AsiganteImage(DataBaseTokens.Character[8]);
@@ -121,6 +131,7 @@ public class TeamManager : MonoBehaviour
     {
         if(!presset[9])
         {
+            SoundObject.GetComponent<AudioSource>().Play();
             TeamsPlayer2.Add(DataBaseTokens.Character[9]);
             presset[9] = true;
             AsiganteImage(DataBaseTokens.Character[9]);

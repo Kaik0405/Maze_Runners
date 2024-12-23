@@ -43,6 +43,7 @@ public class MazeGenerator : MonoBehaviour
         CellImage = CellObject.GetComponent<Image>();
         GenerateMazeInScene();
         AsiganateValuesToCellsScrips();
+        AsiganteSprites();
     }
     private void CreateMatrix() //Metodo para generar una matriz de celdas clasificadas como obstaculos
     {
@@ -158,48 +159,27 @@ public class MazeGenerator : MonoBehaviour
             {
                 Maze[i,j].PosX = i;
                 Maze[i,j].PosY = j;
-                
-                if(Maze[i,j].Obstacle == true)
-                {
-                    CellImage.color = Color.grey;
-                    GameObject cellObjectReference = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
 
-                    gameObjects[i,j] = cellObjectReference;    
-                }
-                else if(Maze[i,j].Start == true)
+                if(Maze[i,j].Start == true)
                 {
                     CellImage.color = Color.blue;
-                    GameObject cellObjectReference = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
-
-                    gameObjects[i,j] = cellObjectReference;
+                    gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
                 }
                 else if(Maze[i,j].FinishLine == true)
                 {
                     CellImage.color = Color.red;
-                    GameObject cellObjectReference = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
-
-                    gameObjects[i,j] = cellObjectReference;
+                    gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
                 }
                 else
-                {  
+                {
+                    CellImage.color = Color.white;  
                     if(Maze[i,j].cellTeleport)
                     {
-                        CellImage.color = Color.cyan;
                         gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
                         TeleportZones.Add(gameObjects[i,j]);
                     }
-
-                    else if(Maze[i,j].Tramp)
-                    {
-                        CellImage.color = Color.magenta;
-                        gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
-                    }
                     else
-                    {
-                        CellImage.color = Color.white;
-                        gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);
-                    }
-                                
+                        gameObjects[i,j] = Instantiate(CellObject,CellObject.transform.position,CellObject.transform.rotation);         
                 }
             }
         }
@@ -321,5 +301,29 @@ public class MazeGenerator : MonoBehaviour
             }
         }
     }
-    
+    private void AsiganteSprites()
+    {
+        for(int i = 0;i < Maze.GetLength(0); i++)
+        {
+            for(int j = 0;j < Maze.GetLength(1); j++)
+            {
+                Image image = gameObjects[i,j].GetComponent<Image>();
+
+                if(!Maze[i,j].Obstacle)
+                {
+                    image.sprite = Resources.Load<Sprite>("");
+                    
+                    if(Maze[i,j].cellTeleport)
+                        image.sprite = Resources.Load<Sprite>("Teleport1");
+                }
+                 
+                else
+                    image.sprite = Resources.Load<Sprite>("Wall2");
+                
+                Color color = image.color;
+                color.a = 0.85f;
+                image.color = color;
+            }
+        }    
+    }
 }
