@@ -89,7 +89,10 @@ public class Player : MonoBehaviour
                 item.GetComponent<TokenDisplay>().Token.CurrentCooldown--;
 
             if(item.GetComponent<TokenDisplay>().Token.Lock)
-                item.GetComponent<TokenDisplay>().Token.CurrentCountLock--;    
+                item.GetComponent<TokenDisplay>().Token.CurrentCountLock--;
+
+            if(item.GetComponent<TokenDisplay>().Token.CurrentCooldown == 0)
+                item.GetComponent<TokenDisplay>().Token.SpriteTokenFull = item.GetComponent<TokenDisplay>().Token.SpriteAux;        
         }
 
     }

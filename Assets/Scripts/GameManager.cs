@@ -153,18 +153,21 @@ public class GameManager : MonoBehaviour
     }
     public void Confirm() // Metodo del boton de confirmar en el panel de seleccion
     {
-        SoundObject.GetComponent<AudioSource>().Play();
-
-        PanelInScene.SetActive(false);
-
-        foreach(var botton in BottonList)
-            Destroy(botton);
-
-        BottonList.Clear();
-        IsPress = true;
-        EndTurnButton.SetActive(true);
-
-        if(SkillAvaliable) ActivateSkillButton.SetActive(true);    
+        if(currentPlayer.IsAvaliable())
+        {
+            SoundObject.GetComponent<AudioSource>().Play();
+    
+            PanelInScene.SetActive(false);
+    
+            foreach(var botton in BottonList)
+                Destroy(botton);
+    
+            BottonList.Clear();
+            IsPress = true;
+            EndTurnButton.SetActive(true);
+    
+            if(SkillAvaliable) ActivateSkillButton.SetActive(true); 
+        }   
     }
     public void ActivateSkillToken() //Metodo para activar la habilidad de la ficha
     {
@@ -174,6 +177,7 @@ public class GameManager : MonoBehaviour
         currentToken.GetComponent<TokenDisplay>().Token.Skill();
         ActivateSkillButton.SetActive(false);
         currentToken.GetComponent<TokenDisplay>().Token.CurrentCooldown = currentToken.GetComponent<TokenDisplay>().Token.GetCooldown();
+        currentToken.GetComponent<TokenDisplay>().Token.SpriteTokenFull =  currentToken.GetComponent<TokenDisplay>().Token.SpriteTokenSkillActive;
         SkillAvaliable = false; 
     }
     public void BackToMenu()

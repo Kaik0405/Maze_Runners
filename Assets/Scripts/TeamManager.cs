@@ -11,15 +11,6 @@ public class TeamManager : MonoBehaviour
     public GameObject Music;
     public GameObject SoundObject;
     bool[] presset = {false, false, false, false, false, false, false, false, false, false};
-    void Start()
-    {
-
-
-    }
-    void Update()
-    {
-        
-    }
     public void ChangeSceneWithDelayReady(string sceneName, float delay)
     {
         if (Music.GetComponent<AudioSource>() != null)
