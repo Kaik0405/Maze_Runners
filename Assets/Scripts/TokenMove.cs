@@ -46,15 +46,22 @@ public class TokenMove : MonoBehaviour
 
             CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed--;
 
-            if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp)
+            GameObject AudioValue = MazeGenerator.gameObjects[dX,dY];
+            AudioValue.GetComponent<CellDisplay>().Asignate(); 
+
+            if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp) //Activacion de trampa
             {
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.trampEffect();
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp = false;
+                AudioValue.GetComponent<CellDisplay>().audioSource.Play();
             }
             if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.cellTeleport)
+            {
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.trampEffect();
+                AudioValue.GetComponent<CellDisplay>().audioSource.Play();
+            }
 
-            if(dX == MazeGenerator.cellEnd.x && dY == MazeGenerator.cellEnd.y)
+            if(dX == MazeGenerator.cellEnd.x && dY == MazeGenerator.cellEnd.y)//Condicion de llegada a la meta
             {
                 GameManager.currentPlayer.AddTokentoEnd();
                 CurrentToken.SetActive(false);
@@ -64,7 +71,6 @@ public class TokenMove : MonoBehaviour
                         GameManager.currentPlayer.ObjectsInMaze.Remove(GameManager.currentPlayer.ObjectsInMaze[i]);    
                 }
             }
-        }
-            
+        }            
     }
 }

@@ -29,8 +29,11 @@ public class Token : ScriptableObject
     public Sprite SpriteTokenFull;
     public Sprite SpriteTokenSkillActive;
     public Sprite SpriteAux;
+    public AudioClip AudioSkill;
   
-    public Token(string name, string infoHability,int speed,int cooldown,TokenSkill skill,Sprite spriteToken,Sprite spriteTokenSelect,Sprite spriteTokenFull,Sprite spriteTokenNormal,Sprite spriteTokenSkillActive)
+    public Token(string name, string infoHability,int speed,int cooldown,TokenSkill skill,Sprite spriteToken,
+    Sprite spriteTokenSelect,Sprite spriteTokenFull,Sprite spriteTokenNormal,Sprite spriteTokenSkillActive,AudioClip audioSkill)
+
     {
         Name = name;
         InfoHability = infoHability;
@@ -42,6 +45,7 @@ public class Token : ScriptableObject
         SpriteTokenFull = spriteTokenFull;
         SpriteTokenNormal = spriteTokenNormal;
         SpriteTokenSkillActive = spriteTokenSkillActive;
+        AudioSkill = audioSkill;
         CurrentSpeed = speed;
         CurrentCooldown = 0;
         SpriteAux = spriteTokenFull;

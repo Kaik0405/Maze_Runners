@@ -48,4 +48,4 @@ public static class TrampEffects
         currentObject.GetComponent<TokenDisplay>().Token.PosX = ZoneTeleports.GetComponent<CellDisplay>().cell.PosX;
         currentObject.GetComponent<TokenDisplay>().Token.PosY = ZoneTeleports.GetComponent<CellDisplay>().cell.PosY;
     }
-}
+}//El teletransporte es un caso particular de trampa que no se considera trampa lo que esta aqui para evitar repetir codigo ;)

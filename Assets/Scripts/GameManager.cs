@@ -173,7 +173,8 @@ public class GameManager : MonoBehaviour
         SoundObject.GetComponent<AudioSource>().Play();
 
         GameObject currentToken = currentPlayer.CurrentTokenObject();
-        currentToken.GetComponent<TokenDisplay>().Token.Skill();
+        StartCoroutine(StopTime(currentToken));
+        
         ActivateSkillButton.SetActive(false);
         currentToken.GetComponent<TokenDisplay>().Token.CurrentCooldown = currentToken.GetComponent<TokenDisplay>().Token.GetCooldown();
         currentToken.GetComponent<TokenDisplay>().Token.SpriteTokenFull =  currentToken.GetComponent<TokenDisplay>().Token.SpriteTokenSkillActive;
@@ -202,5 +203,12 @@ public class GameManager : MonoBehaviour
             Destroy(item);
         foreach (var item in player2.ObjectsInMaze)
             Destroy(item);    
+    }
+    IEnumerator StopTime(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(0.25f);
+        gameObject.GetComponent<TokenDisplay>().audioSource.Play();
+        yield return new WaitForSeconds(7.0f);
+        gameObject.GetComponent<TokenDisplay>().Token.Skill();
     }
 }

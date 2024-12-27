@@ -17,6 +17,7 @@ public class Cell: ScriptableObject
     public delegate void TrampEffect(params object[] param);
     public TrampEffect trampEffect;
     public TrampType trampType = TrampType.Unknown;
+    public AudioClip AudioTramp;
     public Cell(bool Obstacle)
     {
         this.Obstacle = Obstacle;  
@@ -24,7 +25,10 @@ public class Cell: ScriptableObject
     public void AsignateTeleportDelegate()
     {
         if (cellTeleport)
+        {
             trampEffect = TrampEffects.Teleport;
+            AudioTramp = Resources.Load<AudioClip>("TeleportSound");
+        }
     }
     public void AsignateTrampDelegate()
     {
@@ -32,15 +36,19 @@ public class Cell: ScriptableObject
         {
             case TrampType.Sleep:
                 trampEffect = TrampEffects.Sleep;
+                AudioTramp = Resources.Load<AudioClip>("SleepSound");
                 break;
             case TrampType.Freeze:
                 trampEffect = TrampEffects.Freeze;
+                AudioTramp = Resources.Load<AudioClip>("IceSound");
                 break;
             case TrampType.returnInit:
                 trampEffect = TrampEffects.ReturnInit;
+                AudioTramp = Resources.Load<AudioClip>("TeleportSound");
                 break;
             case TrampType.Spines:
                 trampEffect = TrampEffects.Spines;
+                AudioTramp = Resources.Load<AudioClip>("SpikeSound");
                 break;        
             default:
                 break;
