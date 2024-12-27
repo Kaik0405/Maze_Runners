@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public string Name;
     public bool Turn = false;
     public int TokensInFinishLine = 0;
+    public int NumToken;
     public List<Token> TokensList = new List<Token>(); // Guarda las fichas disponibles para el jugador
     public List<GameObject> ObjectsInMaze = new List<GameObject>(); // Almacena las referencias de las fichas en escena
     public Player(string name,bool turn,List<Token> tokens)
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
         Name = name;
         Turn = turn;    
         TokensList = tokens;
+        NumToken = tokens.Count;
     }
     public void InstantiateTokens() //Instancia las fichas en escena
     {

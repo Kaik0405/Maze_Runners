@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
@@ -59,6 +58,11 @@ public class TokenMove : MonoBehaviour
             {
                 GameManager.currentPlayer.AddTokentoEnd();
                 CurrentToken.SetActive(false);
+                for(int i=0;i < GameManager.currentPlayer.ObjectsInMaze.Count;i++)
+                {
+                    if(GameManager.currentPlayer.ObjectsInMaze[i].GetComponent<TokenDisplay>().Token.Name==CurrentToken.GetComponent<TokenDisplay>().Token.Name)
+                        GameManager.currentPlayer.ObjectsInMaze.Remove(GameManager.currentPlayer.ObjectsInMaze[i]);    
+                }
             }
         }
             

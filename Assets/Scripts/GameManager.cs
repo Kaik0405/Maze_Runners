@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
-using UnityEditorInternal;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -42,14 +41,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (player1.TokensInFinishLine == player1.ObjectsInMaze.Count)
+            if (player1.TokensInFinishLine == player1.NumToken)
             {
                 Debug.Log("Player 1 Win");
                 ChangeBotton.SetActive(false);
                 EndTurnButton.SetActive(false);
                 ExistWin = true;
             }
-            else if(player2.TokensInFinishLine == player2.ObjectsInMaze.Count)
+            else if(player2.TokensInFinishLine == player2.NumToken)
             {
                 Debug.Log("Player 2 Win");
                 ChangeBotton.SetActive(false);
@@ -184,6 +183,9 @@ public class GameManager : MonoBehaviour
     {
         ChangeSceneWithDelay("TranslateToScene", 1.0f);
         DontDestroyOnLoad(SoundObject);
+        Destroy(player1);
+        Destroy(player2);
+        DestroyObjectsScene();
         SceneManager.LoadSceneAsync("Main Menu");
     }
     public void ChangeSceneWithDelay(string sceneName, float delay)
@@ -193,5 +195,12 @@ public class GameManager : MonoBehaviour
             SoundObject.GetComponent<AudioSource>().Play();
         }
         Invoke("BackToMenu", delay);
+    }
+    public void DestroyObjectsScene()
+    {
+        foreach (var item in player1.ObjectsInMaze)
+            Destroy(item);
+        foreach (var item in player2.ObjectsInMaze)
+            Destroy(item);    
     }
 }

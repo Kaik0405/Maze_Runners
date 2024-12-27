@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 01cf5147b93f0fb44a3d9051dd6afb0b
+  - enabled: 1
+    path: Assets/Scenes/TeamManager.unity
+    guid: 75be3489224dd92488e2d050f9ef000a
+  - enabled: 1
     path: Assets/Scenes/MazeRunnerGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -14,10 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: fc70f5b5406ed914b96e1e2abf4f721c
-  - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
-    guid: 01cf5147b93f0fb44a3d9051dd6afb0b
-  - enabled: 1
-    path: Assets/Scenes/TeamManager.unity
-    guid: 75be3489224dd92488e2d050f9ef000a
   m_configObjects: {}
