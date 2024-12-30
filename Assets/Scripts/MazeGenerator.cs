@@ -39,6 +39,7 @@ public class MazeGenerator : MonoBehaviour
         GenerateMaze(1, 1);
         GenerateTeleports();
         GenerateTramps();
+        GenerateEnergy();
         CellObject = CellObjectScene;
         CellImage = CellObject.GetComponent<Image>();
         GenerateMazeInScene();
@@ -221,7 +222,6 @@ public class MazeGenerator : MonoBehaviour
                         Maze[i,j].trampType = GenerateTrampType(); //Asigna un enum aleatorio del tipo de trampa
                     }
                 }
-
             }
         }
     }
@@ -248,6 +248,24 @@ public class MazeGenerator : MonoBehaviour
         Cells finishCell = LongestPath(Maze);
         GenerateTeleports(mazeAux,zonesTeleport,finishCell);
         AsignateTeleportZone(zonesTeleport);
+    }
+    void GenerateEnergy() //Metodo para generar botellas de energia en las celdas
+    {
+        System.Random ranNumber = new System.Random();
+
+        for(int i = 0; i < Maze.GetLength(0); i++)
+        {
+            for(int j = 0;j < Maze.GetLength(1); j++)
+            {
+                if(!Maze[i,j].Obstacle && !Maze[i,j].cellTeleport && !Maze[i,j].Tramp)
+                {
+                    int aleatory = ranNumber.Next(1,101);
+
+                    if(Contains(aleatory))
+                        Maze[i,j].EnergyCell = true;
+                }
+            }
+        }
     }
     private void GenerateTeleports(bool[,] booleanMask,List<Cells> zonesTeleport,Cells cellFinish)
     {
@@ -294,8 +312,12 @@ public class MazeGenerator : MonoBehaviour
             {
                 if(Maze[i,j].Tramp)
                     Maze[i,j].AsignateTrampDelegate();
+                
                 if(Maze[i,j].cellTeleport)
                     Maze[i,j].AsignateTeleportDelegate();
+                    
+                if(Maze[i,j].EnergyCell)
+                    Maze[i,j].AsignateTeleportDelegate();    
                         
                 gameObjects[i,j].GetComponent<CellDisplay>().cell = Maze[i,j];
             }
@@ -315,6 +337,8 @@ public class MazeGenerator : MonoBehaviour
                     
                     if(Maze[i,j].cellTeleport)
                         image.sprite = Resources.Load<Sprite>("Teleport1");
+                    if(Maze[i,j].EnergyCell)
+                        image.sprite = Resources.Load<Sprite>("Energy");    
                 }
                  
                 else

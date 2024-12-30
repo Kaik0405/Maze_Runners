@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Assertions.Must;
 
 public class TokenMove : MonoBehaviour
@@ -55,12 +56,19 @@ public class TokenMove : MonoBehaviour
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp = false;
                 AudioValue.GetComponent<CellDisplay>().audioSource.Play();
             }
-            if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.cellTeleport)
+            if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.cellTeleport)//Activacion de teletransporte
             {
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.trampEffect();
                 AudioValue.GetComponent<CellDisplay>().audioSource.Play();
             }
-
+            if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.EnergyCell)//Recoger energia
+            {
+                Image aux = MazeGenerator.gameObjects[dX,dY].GetComponent<Image>();
+                aux.sprite = Resources.Load<Sprite>("None");
+                CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed = CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed + 3;
+                MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.EnergyCell = false;
+                AudioValue.GetComponent<CellDisplay>().audioSource.Play(); 
+            }
             if(dX == MazeGenerator.cellEnd.x && dY == MazeGenerator.cellEnd.y)//Condicion de llegada a la meta
             {
                 GameManager.currentPlayer.AddTokentoEnd();

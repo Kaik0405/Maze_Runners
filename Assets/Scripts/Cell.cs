@@ -10,6 +10,7 @@ public class Cell: ScriptableObject
     public bool Obstacle = true;
     public bool Tramp = false;
     public bool cellTeleport = false;
+    public bool EnergyCell = false;
     public bool Start = false;
     public bool FinishLine = false;
     public int PosX = 0;
@@ -28,6 +29,10 @@ public class Cell: ScriptableObject
         {
             trampEffect = TrampEffects.Teleport;
             AudioTramp = Resources.Load<AudioClip>("TeleportSound");
+        }
+        if (EnergyCell)
+        {
+            AudioTramp = Resources.Load<AudioClip>("SoundEng");
         }
     }
     public void AsignateTrampDelegate()
