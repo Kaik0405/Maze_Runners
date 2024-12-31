@@ -42,6 +42,7 @@ public class TokenMove : MonoBehaviour
             
             CurrentToken.GetComponent<TokenDisplay>().Token.PosX = dX; //actualiza los valores de ubicacion en la matriz
             CurrentToken.GetComponent<TokenDisplay>().Token.PosY = dY;
+            
             CurrentToken.GetComponent<TokenDisplay>().Token.PrePosX = currentPosX;
             CurrentToken.GetComponent<TokenDisplay>().Token.PrePosY = currentPosY;
 
@@ -54,25 +55,35 @@ public class TokenMove : MonoBehaviour
             {
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.trampEffect();
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp = false;
+                
+                CurrentToken.GetComponent<TokenDisplay>().SpriteTrampImage.sprite = MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.ImageTramp;
+                CurrentToken.GetComponent<TokenDisplay>().IncreaseA();
+                
                 AudioValue.GetComponent<CellDisplay>().audioSource.Play();
+                
+                Image image = MazeGenerator.gameObjects[dX,dY].GetComponent<Image>();
+                image.sprite = MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.SpriteDefault;
             }
             if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.cellTeleport)//Activacion de teletransporte
             {
-                MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.trampEffect();
+                MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.trampEffect(); 
                 AudioValue.GetComponent<CellDisplay>().audioSource.Play();
             }
             if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.EnergyCell)//Recoger energia
             {
                 Image aux = MazeGenerator.gameObjects[dX,dY].GetComponent<Image>();
                 aux.sprite = Resources.Load<Sprite>("None");
+                
                 CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed = CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed + 3;
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.EnergyCell = false;
+                
                 AudioValue.GetComponent<CellDisplay>().audioSource.Play(); 
             }
             if(dX == MazeGenerator.cellEnd.x && dY == MazeGenerator.cellEnd.y)//Condicion de llegada a la meta
             {
                 GameManager.currentPlayer.AddTokentoEnd();
                 CurrentToken.SetActive(false);
+                
                 for(int i=0;i < GameManager.currentPlayer.ObjectsInMaze.Count;i++)
                 {
                     if(GameManager.currentPlayer.ObjectsInMaze[i].GetComponent<TokenDisplay>().Token.Name==CurrentToken.GetComponent<TokenDisplay>().Token.Name)

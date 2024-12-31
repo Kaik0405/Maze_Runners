@@ -4,12 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 using UnityEngine;
 using System.Security;
 using Unity.Mathematics;
 using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
 
 public struct Cells
     {
@@ -212,7 +210,7 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int j = 0;j<Maze.GetLength(1);j++)
             {
-                if(!Maze[i,j].Obstacle && !Maze[i,j].cellTeleport) // Detecta si la posicion de la matriz no es un obtaculo
+                if(!Maze[i,j].Obstacle && !Maze[i,j].cellTeleport && !Maze[i,j].Start && !Maze[i,j].FinishLine) // Detecta si la posicion de la matriz no es un obtaculo
                 {
                     int aleatory = ranNumber.Next(1,101);
                     
@@ -257,7 +255,7 @@ public class MazeGenerator : MonoBehaviour
         {
             for(int j = 0;j < Maze.GetLength(1); j++)
             {
-                if(!Maze[i,j].Obstacle && !Maze[i,j].cellTeleport && !Maze[i,j].Tramp)
+                if(!Maze[i,j].Obstacle && !Maze[i,j].cellTeleport && !Maze[i,j].Tramp && !Maze[i,j].Start && !Maze[i,j].FinishLine)
                 {
                     int aleatory = ranNumber.Next(1,101);
 

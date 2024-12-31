@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,10 +66,11 @@ public class Player : MonoBehaviour
     public void SwitchTurn() //Metodo para el cambio de turno del jugador
     {
         Turn = !Turn;
-        DisableScrolling();
+        DisableScrolling(); 
     }
     private void DisableScrolling() //Desabilita el movimiento de la ficha actual del jugador
     {
+        Debug.Log("here");
         foreach(var item in ObjectsInMaze)
             item.GetComponent<TokenDisplay>().Token.Available = false;
     }
@@ -95,8 +95,7 @@ public class Player : MonoBehaviour
 
             if(item.GetComponent<TokenDisplay>().Token.CurrentCooldown == 0)
                 item.GetComponent<TokenDisplay>().Token.SpriteTokenFull = item.GetComponent<TokenDisplay>().Token.SpriteAux;        
-        }
-
+        }  
     }
     public bool IsAvaliable() //Metodo para comprobar si hay fichas desplazables
     {

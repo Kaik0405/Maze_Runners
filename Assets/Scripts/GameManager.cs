@@ -7,17 +7,21 @@ using UnityEngine;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject TonkenInScene; // Referencia a el prefab de la ficha
-    public static GameObject StaticTokenInScene; 
+    public static GameObject StaticTokenInScene; // Referencia a la ficha de la escena
     public GameObject PanelInScene; // Referencia a el panel de seleccion de fichas
     public GameObject ChangeBotton; // Referencia a el boton de cambio de fichas
     public GameObject PanelSelect; // Referencia a el panel de seleccion organizacion
     public GameObject EndTurnButton; // Referencia a el boton de terminar turno
     public GameObject ActivateSkillButton; // Referencia a el boton de activar habilidad
     public GameObject SoundObject; //Referencia al Objeto de sonido
+    public GameObject PanelWin; //Refernecia al panel de victoria
+    public TMP_Text TextPlayerWin;
+    public GameObject PanelSwitchTurn;
     public static Player player1 = new Player("Player1",true,TeamManager.TeamsPlayer1); // Instanciacion del jugador1 
     public static Player player2 = new Player("Player2",false,TeamManager.TeamsPlayer2); // Instanciacion del jugador2 
     List<GameObject> BottonList = new List<GameObject>(); // Lista de botones que se generan en la escena
@@ -47,6 +51,8 @@ public class GameManager : MonoBehaviour
                 ChangeBotton.SetActive(false);
                 EndTurnButton.SetActive(false);
                 ExistWin = true;
+                PanelWin.SetActive(true);
+                TextPlayerWin.text = player1.Name+" Gana";
             }
             else if(player2.TokensInFinishLine == player2.NumToken)
             {
@@ -54,15 +60,19 @@ public class GameManager : MonoBehaviour
                 ChangeBotton.SetActive(false);
                 EndTurnButton.SetActive(false);
                 ExistWin = true;
+                PanelWin.SetActive(true);
+                TextPlayerWin.text = player2.Name+" Gana";
             }
         }
     }
     public void EndTurn() // Metodo boton para el cambio de turno
     {
+        StartCoroutine(ActivateP(PanelSwitchTurn));
         SoundObject.GetComponent<AudioSource>().Play();
         
         IsPress = false;
         ChangeBotton.SetActive(true);
+        
         player1.SwitchTurn();
         player2.SwitchTurn();
         currentPlayer.ResetMoveDistance();
@@ -210,5 +220,11 @@ public class GameManager : MonoBehaviour
         gameObject.GetComponent<TokenDisplay>().audioSource.Play();
         yield return new WaitForSeconds(7.0f);
         gameObject.GetComponent<TokenDisplay>().Token.Skill();
+    }
+    IEnumerator ActivateP(GameObject gameObject)
+    {
+        gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        gameObject.SetActive(false);
     }
 }

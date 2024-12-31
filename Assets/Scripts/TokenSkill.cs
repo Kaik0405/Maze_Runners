@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class TokenSkill
 {
@@ -17,8 +18,14 @@ public static class TokenSkill
         for(int i = x; i < dx; i++)
             for(int j = y; j < dy; j++)
                 if(Check(MazeGenerator.gameObjects,i,j))
-                    MazeGenerator.gameObjects[i,j].GetComponent<CellDisplay>().cell.Tramp = false;
-        
+                {
+                    Cell aux = MazeGenerator.gameObjects[i,j].GetComponent<CellDisplay>().cell;
+                    if(aux.Tramp && (!aux.Start) && (!aux.FinishLine)) 
+                    {
+                        MazeGenerator.gameObjects[i,j].GetComponent<CellDisplay>().cell.Tramp = false;
+                        UpdateSprites(MazeGenerator.gameObjects[i,j]);
+                    }
+                }
     }
     public static void IncreseSpeed(params object[] param) //Aumenta el desplazamiento en 3 
     {
@@ -146,5 +153,10 @@ public static class TokenSkill
         if(x>=gameObjects.GetLength(0)||y>=gameObjects.GetLength(1)) return false;
 
         return true;
+    }
+    private static void UpdateSprites(GameObject gameObject)
+    {
+        Image image = gameObject.GetComponent<Image>();
+        image.sprite = gameObject.GetComponent<CellDisplay>().cell.SpriteDefault;
     }
 }

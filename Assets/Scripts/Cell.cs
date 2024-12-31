@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +18,8 @@ public class Cell: ScriptableObject
     public TrampEffect trampEffect;
     public TrampType trampType = TrampType.Unknown;
     public AudioClip AudioTramp;
+    public Sprite ImageTramp;
+    public Sprite SpriteDefault = Resources.Load<Sprite>("X");
     public Cell(bool Obstacle)
     {
         this.Obstacle = Obstacle;  
@@ -42,18 +43,22 @@ public class Cell: ScriptableObject
             case TrampType.Sleep:
                 trampEffect = TrampEffects.Sleep;
                 AudioTramp = Resources.Load<AudioClip>("SleepSound");
+                ImageTramp = Resources.Load<Sprite>("Zzz");
                 break;
             case TrampType.Freeze:
                 trampEffect = TrampEffects.Freeze;
                 AudioTramp = Resources.Load<AudioClip>("IceSound");
+                ImageTramp = Resources.Load<Sprite>("Frezze");
                 break;
             case TrampType.returnInit:
                 trampEffect = TrampEffects.ReturnInit;
                 AudioTramp = Resources.Load<AudioClip>("TeleportSound");
+                ImageTramp = Resources.Load<Sprite>("Teleport");
                 break;
             case TrampType.Spines:
                 trampEffect = TrampEffects.Spines;
                 AudioTramp = Resources.Load<AudioClip>("SpikeSound");
+                ImageTramp = Resources.Load<Sprite>("Spike");
                 break;        
             default:
                 break;
