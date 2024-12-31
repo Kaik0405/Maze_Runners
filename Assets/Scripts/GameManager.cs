@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
 using UnityEngine.SceneManagement;
 using TMPro;
-
 public class GameManager : MonoBehaviour
 {
     public GameObject TonkenInScene; // Referencia a el prefab de la ficha
@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     public GameObject PanelWin; //Refernecia al panel de victoria
     public TMP_Text TextPlayerWin;
     public GameObject PanelSwitchTurn;
-    public static Player player1 = new Player("Player1",true,TeamManager.TeamsPlayer1); // Instanciacion del jugador1 
-    public static Player player2 = new Player("Player2",false,TeamManager.TeamsPlayer2); // Instanciacion del jugador2 
+    public static Player player1 = new Player(TeamManager.NamePlayer1,true,TeamManager.TeamsPlayer1); // Instanciacion del jugador1 
+    public static Player player2 = new Player(TeamManager.NamePlayer2,false,TeamManager.TeamsPlayer2); // Instanciacion del jugador2 
     List<GameObject> BottonList = new List<GameObject>(); // Lista de botones que se generan en la escena
     public static Player currentPlayer;
     public static bool IsPress = false;

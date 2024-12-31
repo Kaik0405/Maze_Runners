@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class TeamManager : MonoBehaviour
 {
     public static List<Token> TeamsPlayer1 = new List<Token>();
     public static List<Token> TeamsPlayer2 = new List<Token>();
+    public static string NamePlayer1;
+    public static string NamePlayer2;
+    public TMP_Text player1Name;
+    public TMP_Text player2Name;
     public GameObject Music;
     public GameObject SoundObject;
     bool[] presset = {false, false, false, false, false, false, false, false, false, false};
@@ -21,7 +26,10 @@ public class TeamManager : MonoBehaviour
     }
     public void Ready()
     {
-        if((TeamsPlayer1.Count == TeamsPlayer2.Count)&&(TeamsPlayer1.Count > 0))
+        NamePlayer1 = player1Name.text;
+        NamePlayer2 = player2Name.text;
+
+        if((TeamsPlayer1.Count == TeamsPlayer2.Count) && (TeamsPlayer1.Count > 0) && (player1Name.text != "" || player1Name.text != ""))
         {
             ChangeSceneWithDelayReady("TranslateToScene", 1.0f);
             DontDestroyOnLoad(Music);   
