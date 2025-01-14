@@ -11,7 +11,7 @@ public class CellDisplay : MonoBehaviour
     void Update()
     {
     }
-    public void Asignate()
+    public void Asignate() //Le agrega el componente AudioSourse a al GameObject asi como su sonido respectivo 
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;

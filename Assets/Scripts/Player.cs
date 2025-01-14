@@ -70,7 +70,6 @@ public class Player : MonoBehaviour
     }
     private void DisableScrolling() //Desabilita el movimiento de la ficha actual del jugador
     {
-        Debug.Log("here");
         foreach(var item in ObjectsInMaze)
             item.GetComponent<TokenDisplay>().Token.Available = false;
     }

@@ -321,7 +321,7 @@ public class MazeGenerator : MonoBehaviour
             }
         }
     }
-    private void AsiganteSprites()
+    private void AsiganteSprites() //Asigna los sprites de los objetos del laberinto
     {
         for(int i = 0;i < Maze.GetLength(0); i++)
         {

@@ -24,7 +24,7 @@ public class Cell: ScriptableObject
     {
         this.Obstacle = Obstacle;  
     }
-    public void AsignateTeleportDelegate()
+    public void AsignateTeleportDelegate() //Metodo para asignar las imagen y el zonido de la celda si es de teletransporte
     {
         if (cellTeleport)
         {
@@ -36,7 +36,7 @@ public class Cell: ScriptableObject
             AudioTramp = Resources.Load<AudioClip>("SoundEng");
         }
     }
-    public void AsignateTrampDelegate()
+    public void AsignateTrampDelegate() //Metodo para asignar las imagenes y sonidos segun el tipo de trampa
     {
         switch (trampType)
         {

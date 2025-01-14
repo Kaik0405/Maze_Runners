@@ -16,7 +16,7 @@ public class DataBaseTokens : MonoBehaviour
                             "Destruye todas las trampas que estan en el radio de desplazamiento de la ficha",
                             "Envia la ficha hacia una zona de teletransporte aleatoria",
                             "Manda todas la fichas en el campo para su posicion anterior"};
-    void Awake()
+    void Awake() //Base de datos de todas las Fichas disponibles para jugar
     {
         Character.Add(new Token("Natsu"   ,Descritions[0],8,2,TokenSkill.DestroyTrampInRadius,Resources.Load<Sprite>("NatsuF"),   Resources.Load<Sprite>("NatsuFSelect"),   Resources.Load<Sprite>("NatsuFull"),    Resources.Load<Sprite>("NatsuFDef"),   Resources.Load<Sprite>("NatsuS"),   Resources.Load<AudioClip>("NatsuSound")));
         Character.Add(new Token("Lucy"    ,Descritions[1],7,3,TokenSkill.SendTeleportZone,    Resources.Load<Sprite>("LucyF"),    Resources.Load<Sprite>("LucyFSelect"),    Resources.Load<Sprite>("LucyFull"),     Resources.Load<Sprite>("LucyFDef"),    Resources.Load<Sprite>("LucyS"),    Resources.Load<AudioClip>("LucySound")));
