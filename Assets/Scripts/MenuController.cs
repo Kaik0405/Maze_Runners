@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
+    //Script encargado de la gestion del menu
     public GameObject Music;
     public void ChangeSceneWithDelay(string sceneName, float delay)
     {

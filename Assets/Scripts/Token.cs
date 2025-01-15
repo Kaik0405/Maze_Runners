@@ -7,18 +7,22 @@ using UnityEngine.EventSystems;
 [CreateAssetMenu(fileName = "new Token", menuName = "Token")]
 public class Token : ScriptableObject
 {
+    //Clase encargadad de la informacion de la ficha
     public string Name;
     public string InfoHability;
     int Speed;
     int Cooldown;
     public bool Available = false;
-    public int PosX = 1;
+    //Posiciones actual
+    public int PosX = 1; 
     public int PosY = 1;
+    //Posicion anterior
     public int PrePosX = 1; 
     public int PrePosY = 1;
+    //Velocidad y Cooldown actual
     public int CurrentSpeed;
     public int CurrentCooldown;
-    public bool Lock = false;
+    public bool Lock = false; //Especifica si la ficha esta bloqueada por alguna trampa
     int CountLock = 3;
     public int CurrentCountLock = 0;
     public delegate void TokenSkill(params object[] param);

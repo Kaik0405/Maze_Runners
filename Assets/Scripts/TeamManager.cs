@@ -7,6 +7,7 @@ using TMPro;
 
 public class TeamManager : MonoBehaviour
 {
+    //Scrip encargado de guardar y gestionar la información del menú de selección de personajes
     public static List<Token> TeamsPlayer1 = new List<Token>();
     public static List<Token> TeamsPlayer2 = new List<Token>();
     public static string NamePlayer1;

@@ -40,10 +40,10 @@ public class TokenMove : MonoBehaviour
             CurrentToken.transform.SetParent(MazeGenerator.gameObjects[dX,dY].transform); //Cambia el padre de la ficha a la celda a la que se desplazo
             CurrentToken.transform.position = MazeGenerator.gameObjects[dX,dY].transform.position; //Le Asigna los valores de posicion a la que se desplazo
             
-            CurrentToken.GetComponent<TokenDisplay>().Token.PosX = dX; //actualiza los valores de ubicacion en la matriz
+            CurrentToken.GetComponent<TokenDisplay>().Token.PosX = dX; //actualiza los valores de ubicacion en la matriz de la ficha
             CurrentToken.GetComponent<TokenDisplay>().Token.PosY = dY;
             
-            CurrentToken.GetComponent<TokenDisplay>().Token.PrePosX = currentPosX;
+            CurrentToken.GetComponent<TokenDisplay>().Token.PrePosX = currentPosX; //actualiza los valores de la posicion anterior de la ficha
             CurrentToken.GetComponent<TokenDisplay>().Token.PrePosY = currentPosY;
 
             CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed--;
@@ -54,8 +54,9 @@ public class TokenMove : MonoBehaviour
             if(MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp) //Activacion de trampa
             {
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.trampEffect();
-                MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp = false;
-                
+                MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.Tramp = false; //deshabilita la trampa
+
+                //Le asigna el valor de la imagen de la trampa a la ficha 
                 CurrentToken.GetComponent<TokenDisplay>().SpriteTrampImage.sprite = MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.ImageTramp;
                 CurrentToken.GetComponent<TokenDisplay>().IncreaseA();
                 
@@ -74,6 +75,7 @@ public class TokenMove : MonoBehaviour
                 Image aux = MazeGenerator.gameObjects[dX,dY].GetComponent<Image>();
                 aux.sprite = Resources.Load<Sprite>("None");
                 
+                //Aumenta la velocidad de la ficha y quita la botella de energia
                 CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed = CurrentToken.GetComponent<TokenDisplay>().Token.CurrentSpeed + 3;
                 MazeGenerator.gameObjects[dX,dY].GetComponent<CellDisplay>().cell.EnergyCell = false;
                 

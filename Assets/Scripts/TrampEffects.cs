@@ -25,8 +25,7 @@ public static class TrampEffects
     {
         GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject();
         currentObject.GetComponent<TokenDisplay>().Token.Lock = true;
-        currentObject.GetComponent<TokenDisplay>().Token.CurrentCountLock = currentObject.GetComponent<TokenDisplay>().Token.GetCountLock(); 
-           
+        currentObject.GetComponent<TokenDisplay>().Token.CurrentCountLock = currentObject.GetComponent<TokenDisplay>().Token.GetCountLock();        
     }
     public static void Spines(params object[] param) //Hace que la ficha se mueva la mitad de los pasos restantes
     {
@@ -48,4 +47,4 @@ public static class TrampEffects
         currentObject.GetComponent<TokenDisplay>().Token.PosX = ZoneTeleports.GetComponent<CellDisplay>().cell.PosX;
         currentObject.GetComponent<TokenDisplay>().Token.PosY = ZoneTeleports.GetComponent<CellDisplay>().cell.PosY;
     }
-}//El teletransporte es un caso particular de trampa que no se considera trampa lo que esta aqui para evitar repetir codigo ;)
+}//El teletransporte es un caso particular de trampa que no se considera trampa lo que está aquí para evitar repetir código ;)

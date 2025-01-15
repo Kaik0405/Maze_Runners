@@ -50,7 +50,7 @@ public static class TokenSkill
     }
     public static void Exchange(params object[] param)//Intercambia dos fichas aletorias del laberinto
     {
-        GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject();
+        GameObject currentObject = GameManager.currentPlayer.CurrentTokenObject(); //Hace referencia al token en juego del jugador actual
 
         if(GameManager.currentPlayer.Name == GameManager.player1.Name)
             AsignateValues(currentObject, GameManager.player2);
@@ -117,9 +117,9 @@ public static class TokenSkill
             }
         }
     }
-    private static void AsignateValues(GameObject currentObject, Player player)
+    private static void AsignateValues(GameObject currentObject, Player player) //Metodo que gestiona el intercambio de las fichas de ambos jugadores
     {
-        System.Random random= new System.Random();
+        System.Random random = new System.Random();
         int aleatory = random.Next(0, player.ObjectsInMaze.Count);
 
         GameObject objectAdversary = player.ObjectsInMaze[aleatory];
@@ -147,14 +147,14 @@ public static class TokenSkill
             objectAdversary.GetComponent<TokenDisplay>().Token.PosY = y;
         }
     }
-    private static bool Check(GameObject[,] gameObjects,int x,int y)
+    private static bool Check(GameObject[,] gameObjects,int x,int y) //Verifica si las posiciones estan dentro de un rango válido
     {
         if(x<0||y<0) return false;
         if(x>=gameObjects.GetLength(0)||y>=gameObjects.GetLength(1)) return false;
 
         return true;
     }
-    private static void UpdateSprites(GameObject gameObject)
+    private static void UpdateSprites(GameObject gameObject) //Actualiza los sprites del las fichas por los originales
     {
         Image image = gameObject.GetComponent<Image>();
         image.sprite = gameObject.GetComponent<CellDisplay>().cell.SpriteDefault;

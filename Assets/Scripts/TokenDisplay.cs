@@ -14,7 +14,7 @@ public class TokenDisplay : MonoBehaviour
     public Sprite SpriteToken;
     public Image ImageToken;
     public AudioSource audioSource;
-    public void Asignate()
+    public void Asignate() //Asigna las imagenes de la ficha y los audios
     {
         SpriteToken = Token.SpriteTokenSelect;
         ImageToken.sprite = SpriteToken;
@@ -33,14 +33,14 @@ public class TokenDisplay : MonoBehaviour
                 DecreaseA();
         }
     }
-    public void IncreaseA()
+    public void IncreaseA() //Gestiona la opacidad de las imagenes superpuesta para aumentarla
     {
         Image image = SpriteTramp.GetComponent<Image>();
         Color color = image.color;
         color.a = 1.0f;
         image.color = color;
     }
-    public void DecreaseA()
+    public void DecreaseA() //Gestiona la opacidad de las imagenes superpuesta para disminuirla
     {
         Image image = SpriteTramp.GetComponent<Image>();
         Color color = image.color;
