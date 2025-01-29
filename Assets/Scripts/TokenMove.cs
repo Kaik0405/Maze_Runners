@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.Assertions.Must;
 
 public class TokenMove : MonoBehaviour
 {
-    public GameObject CurrentToken;    
+    public GameObject CurrentToken;
+    private bool value = false;    
     void Start()
     {
         
@@ -83,6 +85,9 @@ public class TokenMove : MonoBehaviour
             }
             if(dX == MazeGenerator.cellEnd.x && dY == MazeGenerator.cellEnd.y)//Condicion de llegada a la meta
             {
+                GameManager.SoundEndAStatic.GetComponent<AudioSource>().Play();
+                value = true;
+
                 GameManager.currentPlayer.AddTokentoEnd();
                 CurrentToken.SetActive(false);
                 
@@ -91,7 +96,13 @@ public class TokenMove : MonoBehaviour
                     if(GameManager.currentPlayer.ObjectsInMaze[i].GetComponent<TokenDisplay>().Token.Name==CurrentToken.GetComponent<TokenDisplay>().Token.Name)
                         GameManager.currentPlayer.ObjectsInMaze.Remove(GameManager.currentPlayer.ObjectsInMaze[i]);    
                 }
+                GameManager.ActivateSkillButtonStatic.SetActive(false);
             }
+            if(!value)
+            {
+                GameManager.SoundMoveStatic.GetComponent<AudioSource>().Play();
+            }
+            value = false;
         }            
-    }
+    } 
 }

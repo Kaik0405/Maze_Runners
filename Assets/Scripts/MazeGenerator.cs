@@ -35,6 +35,12 @@ public class MazeGenerator : MonoBehaviour
     {
         CreateMatrix();
         GenerateMaze(1, 1);
+
+        Maze[1,1].Start = true;
+        Cells finish = LongestPath(Maze);
+        cellEnd = new Cells(finish.x,finish.y);
+        Maze[finish.x,finish.y].FinishLine = true;
+        
         GenerateTeleports();
         GenerateTramps();
         GenerateEnergy();
@@ -146,12 +152,6 @@ public class MazeGenerator : MonoBehaviour
     }
     void GenerateMazeInScene() //instanciacion en escena de las celdas del laberinto
     {
-        Maze[1,1].Start = true;
-        Cells finish = LongestPath(Maze);
-        cellEnd = new Cells(finish.x,finish.y);
-
-        Maze[finish.x,finish.y].FinishLine = true;
-
         for (int i = 0; i < Maze.GetLength(0); i++)
         {
             for (int j = 0; j < Maze.GetLength(1); j++)

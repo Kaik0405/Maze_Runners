@@ -18,10 +18,20 @@ public class GameManager : MonoBehaviour
     public GameObject PanelSelect; // Referencia a el panel de seleccion organizacion
     public GameObject EndTurnButton; // Referencia a el boton de terminar turno
     public GameObject ActivateSkillButton; // Referencia a el boton de activar habilidad
+    public static GameObject ActivateSkillButtonStatic; // Referencia a el boton de activar habilidad(estatica)
     public GameObject SoundObject; //Referencia al Objeto de sonido
+    public GameObject SoundEnd; //Referencia al objeto que tiene el sonido cuando alguien gana
+    public GameObject SoundMove; //Referencia al objeto que tiene el sonido del desplazamiento de la ficha
+    public static GameObject SoundMoveStatic; //Ref estatica
+    public GameObject SoundEndA; //Referencia al objeto que tiene el sonido de cuando una ficha llega a la meta
+    public static GameObject SoundEndAStatic; //Ref estatica
     public GameObject PanelWin; //Refernecia al panel de victoria
     public TMP_Text TextPlayerWin; //Texto del jugador ganador
     public GameObject PanelSwitchTurn; //Panel de cambio de turno
+    public TMP_Text NameInScenePlayer1; //Referencia al texto que muestra el nombre del jugador1
+    public TMP_Text NameInScenePlayer2; //Referencia al texto que muestra el nombre del jugador2
+    public TMP_Text InfoTokenInFinishLine1; //Referencia al texto que muestra la cantidad de fichas en la meta del jugador 1
+    public TMP_Text InfoTokenInFinishLine2; //Referencia al texto que muestra la cantidad de fichas en la meta del jugador 2
     public static Player player1 = new Player(TeamManager.NamePlayer1,true,TeamManager.TeamsPlayer1); // Instanciacion del jugador1 
     public static Player player2 = new Player(TeamManager.NamePlayer2,false,TeamManager.TeamsPlayer2); // Instanciacion del jugador2 
     List<GameObject> BottonList = new List<GameObject>(); // Lista de botones que se generan en la escena
@@ -32,13 +42,21 @@ public class GameManager : MonoBehaviour
     void Start()    
     {
         currentPlayer = new Player("",false,TeamManager.TeamsPlayer1); //Asignacion del jugador actual
-        StaticTokenInScene = TonkenInScene; 
+        StaticTokenInScene = TonkenInScene;
+        ActivateSkillButtonStatic = ActivateSkillButton;
         player1.InstantiateTokens();
         player2.InstantiateTokens();
         currentPlayer = player1;
+        NameInScenePlayer1.text = player1.Name+":";
+        NameInScenePlayer2.text = player2.Name+":";
+        SoundEndAStatic = SoundEndA;
+        SoundMoveStatic = SoundMove;
     }
     void Update()
     {
+        InfoTokenInFinishLine1.text = player1.TokensInFinishLine.ToString()+" / "+player1.TokensList.Count.ToString();
+        InfoTokenInFinishLine2.text = player2.TokensInFinishLine.ToString()+" / "+player2.TokensList.Count.ToString();
+
         if(ExistWin)
         {
 
@@ -52,6 +70,8 @@ public class GameManager : MonoBehaviour
                 ExistWin = true;
                 PanelWin.SetActive(true);
                 TextPlayerWin.text = player1.Name+" Gana";
+                GameObject.Find("BackGroundSound").GetComponent<AudioSource>().Stop();
+                StartCoroutine(StopM());
             }
             else if(player2.TokensInFinishLine == player2.NumToken) //Condicion de victoria del jugador2
             {
@@ -60,6 +80,8 @@ public class GameManager : MonoBehaviour
                 ExistWin = true;
                 PanelWin.SetActive(true);
                 TextPlayerWin.text = player2.Name+" Gana";
+                GameObject.Find("BackGroundSound").GetComponent<AudioSource>().Stop();
+                StartCoroutine(StopM());
             }
         }
     }
@@ -198,14 +220,9 @@ public class GameManager : MonoBehaviour
         currentToken.GetComponent<TokenDisplay>().Token.SpriteTokenFull =  currentToken.GetComponent<TokenDisplay>().Token.SpriteTokenSkillActive;
         SkillAvaliable = false; 
     }
-    public void BackToMenu() //Logica de volver al menu
+    public void Quit() //Logica de volver al menu
     {
-        ChangeSceneWithDelay("TranslateToScene", 1.0f);
-        DontDestroyOnLoad(SoundObject);
-        Destroy(player1);
-        Destroy(player2);
-        DestroyObjectsScene();
-        SceneManager.LoadSceneAsync("Main Menu");
+        Application.Quit();
     }
     public void ChangeSceneWithDelay(string sceneName, float delay)
     {
@@ -235,6 +252,11 @@ public class GameManager : MonoBehaviour
         gameObject.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         gameObject.SetActive(false);
+    }
+    IEnumerator StopM()
+    {
+        yield return new WaitForSeconds(1.0f);
+        SoundEnd.GetComponent<AudioSource>().Play();
     }
     private float TimeForPlayer(string name)
     {
