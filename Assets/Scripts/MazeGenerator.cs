@@ -255,7 +255,7 @@ public class MazeGenerator : MonoBehaviour
         {
             for(int j = 0;j < Maze.GetLength(1); j++)
             {
-                if(!Maze[i,j].Obstacle && !Maze[i,j].cellTeleport && !Maze[i,j].Tramp && !Maze[i,j].Start && !Maze[i,j].FinishLine)
+                if(!(Maze[i,j].Obstacle || Maze[i,j].cellTeleport || Maze[i,j].Tramp || Maze[i,j].Start || Maze[i,j].FinishLine))
                 {
                     int aleatory = ranNumber.Next(1,101);
 

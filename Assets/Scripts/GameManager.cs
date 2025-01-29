@@ -226,7 +226,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f);
         gameObject.GetComponent<TokenDisplay>().audioSource.Play();
-        yield return new WaitForSeconds(7.0f);
+
+        yield return new WaitForSeconds(TimeForPlayer(gameObject.GetComponent<TokenDisplay>().Token.Name));
         gameObject.GetComponent<TokenDisplay>().Token.Skill();
     }
     IEnumerator ActivateP(GameObject gameObject) //Corrutina para la activacion del panel
@@ -234,5 +235,16 @@ public class GameManager : MonoBehaviour
         gameObject.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         gameObject.SetActive(false);
+    }
+    private float TimeForPlayer(string name)
+    {
+        string[] names = {"Natsu","Lucy","Gray","Erza","Wendy","Laxus","Gajeel","Mirajane","Juvia","Mystogan"};
+        float[] times = {7.0f,7.0f,7.0f,8.0f,6.9f,4.0f,3.0f,9.0f,1.3f,9.0f};
+        
+        for (int i = 0;i<names.Length;i++)
+            if(names[i] == name) 
+                return times[i];
+        
+        return 0.0f;
     }
 }
