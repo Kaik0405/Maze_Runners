@@ -2,7 +2,7 @@
 
 Maze_Runners es un juego desarrollado en el motor de juegos unity el cual consiste en una carrera a traves de un laberinto entre dos jugadores con el objetivo de llevar cada jugador todas sus
 fichas a la meta antes que el jugador rival. La generacion de laverintos fue realizada de forma dinamica usando el algoritmo de Prim del cual entraremos en profundidad un poco más adelante. La
-temática de este juego esta basada en el anime Fairy Tail vinculada a la carrera de las 24 horas del gremio pero en este caso la carrera es dentro de un laberinto con trampas teletrnasportadores
+temática de este juego esta basada en el anime Fairy Tail vinculada a la carrera de las 24 horas del gremio pero en este caso la carrera es dentro de un laberinto con trampas teletransportadores
 y demás cositas...
 
 ### Desarrollo del Proyecto
@@ -291,3 +291,24 @@ public class GameManager : MonoBehaviour
     // lo otro son los metodos mencionados anteriormente asi como algunos metodos auxiliares
 }
 ```
+
+### Conclusiones y Agradecimientos
+
+Todo esto es el resultado de algunas noches sin dormir y unos cuantos dias dedicandole el tiempo necesario sin dejar de lado las 200 mil cosas que uno tiene arriba siempre como todos, al final no se ni como pero lo puede terminar bastante rapido y sin mucho trabajo pero eso no quita que fue un reto increible, el hecho de instanciar botones por poner un ejemplo era algo que ni creia posible, y fue una lucha constante. Las ideas me escaseaban pero con los comentarios de algunos de mis compañeros pude mejorar algunas cositas y el resultado final es bastante decente, siento que incluso pudo ser mejor pero no puedo pedir mas. Me gustaria agradecerle a *Manuel (El Tanke)* , *Elizabeth* , *Julio* que me dieron ideas bastante utiles al hablar con ellos y explicarles muchas cosas, tambien a *Cristian* que me dio ideas bastante geniales ademas de que fue uno de los beta tester y a la Fan número uno de mi juego que no le pude ganar ni una sola vez y que me ayudo a encontrar los bugs finales asi como las mejoras extras en el apartado audiovisual, mi novia *Laura* (me ganó 3 veces seguidas XD), despues de todo estos meses el resultado en parte tambien se lo debo a todos ellos.
+
+### Como Jugar
+
+Una vez ejecutado el juego aparecera un menu sencillo que lo unico que tendran que hacer es apretar el boton de jugar y a continuacion saldra la escena de seleccion de personajes, una vez ahi los jugadores podran poner su nombre encima del panel de personajes que decidan, cabe aclarar que cada jugador tendra solamente las fichas asociadas a su panel disponibles y que al seleccionarlas el marco se pondra en dorado, para iniciar el juego deberan apretar en confirmar teniendo la misma cantidad de fichas cada jugador. Al entrar al juego se encontrar con el laberinto en el centro y 2 botones en la parte superir izquierda de la pantalla los cuales son los del cambio de turno y seleccion de ficha, al apretar el boton de selecionar ficha saldra un panel de selecion con las fichas disponibles, se le debe hacer clic a la ficha que se desea usar y a continuacion apretar el boton de confirmar. Si la ficha no tiene cooldow tendra el boton de Habilidad disponible y con apretarlo la ficha usará su habilidad, para moverse debera apretar las teclas W A S D como es utilizado comunmente y el objetivo sera llegar a la celda roja que es la meta, en el laberinto hay trampas exparsidas pero no visibles y hay un 20 % de posibilidades de caer en una, tambien estan las botellas de energia  que aumentan la estamina de la ficha en 3, y en las zonas sin salidas se encuentran las zonas de teletransporte que te envian a una zona de teletransporte aleatoria incluyendo la misma en la que se entra. Cuando todas las fichas del jugador logren llegar al final, el jugador sera declarado ganador. En la parte inferior se muestra un contador de las fichas en la meta actualmente. Con todo esto lo unico que le vendria quedando seria instalarlo.
+
+### Instalacion y Links de Descarga
+
+Para instalar el juego se deben seguir los siguientes pasos una vez descargado el archivo.rar que aparece al final:
+
+- Descomprimir el rar.
+- Ejecutar el Icono en Rojo que tiene el nombre del proyecto
+- Por ultimo... a jugar :)
+
+Para descagar el archivo del juego (archivo.rar) debera hacer click [Aquí](https://github.com/Kaik0405/Maze_Runners/releases/download/v1.0/Maze_Runners_Version.1.0.rar)  
+
+
+
