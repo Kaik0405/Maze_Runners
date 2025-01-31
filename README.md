@@ -1,18 +1,11 @@
-### **Introduccion**
+### **Introducción**
 
-Maze_Runners es un juego desarrollado en el motor de juegos unity el cual consiste en una carrera a traves de un laberinto entre dos jugadores con el objetivo de llevar cada jugador todas sus
-fichas a la meta antes que el jugador rival. La generacion de laverintos fue realizada de forma dinamica usando el algoritmo de Prim del cual entraremos en profundidad un poco más adelante. La
-temática de este juego esta basada en el anime Fairy Tail vinculada a la carrera de las 24 horas del gremio pero en este caso la carrera es dentro de un laberinto con trampas teletransportadores
-y demás cositas...
+Maze_Runners es un juego desarrollado en el motor de juegos Unity, el cual consiste en una carrera a través de un laberinto entre dos jugadores, con el objetivo de llevar cada jugador todas sus fichas a la meta antes que el jugador rival. La generación de laberintos fue realizada de forma dinámica usando el algoritmo de Prim, del cual entraremos en profundidad un poco más adelante. La temática de este juego está basada en el anime *Fairy Tail*, vinculada a la carrera de las 24 horas del gremio, pero en este caso la carrera es dentro de un laberinto con trampas, teletransportadores y demás cositas...
 
 ### Desarrollo del Proyecto
 
-Este proyecto lo tuve que dividir en varias faces para su desarrollo, asi que empece por la parte principal que es **El Laberinto** que en un primer momento no tenía ni idea de como hacer un
-algoritmo que me generace laberintos de forma aleatoria, entonces me puse a investigar y existían varios métodos para conseguir este resultado, muchos de los cuales eran bastantes turbios pero
-encontré uno que me encantó especialmente porque era muy legible y usaba la técnica de recursividad conocida como *Bactracking* (a este algoritmo es una variante del algoritmo de Prim), lo que
-hace es abrir caminos de forma aleatria empezando por una celda en especifico que esta representada de forma matricial, estos caminos se abren en cuatro direcciones posible cumpliendo ciertos 
-requisistos para ello para esto se necesita una matriz y una forma de identifar cuando es pared o no y ademas para manejar de mejor manera las direcciones se utiliza una estructura para indicar las 4 posibles direcciones. Con todo esto se llega al metodo que se muestra a coontinuacion:
-```
+Este proyecto lo tuve que dividir en varias fases para su desarrollo, así que empecé por la parte principal que es **El Laberinto**. En un primer momento, no tenía ni idea de cómo hacer un algoritmo que me generara laberintos de forma aleatoria, entonces me puse a investigar y existían varios métodos para conseguir este resultado, muchos de los cuales eran bastante turbios. Pero encontré uno que me encantó, especialmente porque era muy legible y usaba la técnica de recursividad conocida como *Backtracking* (este algoritmo es una variante del algoritmo de Prim). Lo que hace es abrir caminos de forma aleatoria, empezando por una celda en específico que está representada de forma matricial. Estos caminos se abren en cuatro direcciones posibles, cumpliendo ciertos requisitos para ello. Para esto se necesita una matriz y una forma de identificar cuándo es pared o no, y además, para manejar de mejor manera las direcciones, se utiliza una estructura para indicar las cuatro posibles direcciones. Con todo esto se llega al método que se muestra a continuación:
+```csharp
 void GenerateMaze(int x,int y) // Algoritmo recursivo para generar el laberinto
     {
         Maze[x, y].Obstacle = Path;
@@ -40,12 +33,8 @@ void GenerateMaze(int x,int y) // Algoritmo recursivo para generar el laberinto
         }
     }
 ```
-De esta forma se consigue generar el laberinto de forma aleatoria abriendo caminos de forma aleatoria, recursiva y sin dejar zonas inaccesibles. 
-Como quería una meta no sabia donde la iba a colocar ni donde seria mas conveniente hacerlo por el simple hecho de que el laberinto siempre iba a ser diferenete por lo que se me ocurrio que 
-podia hacerlo buscando el camino más largo desde donde empieza el laberinto que en este caso es la posicion [1,1] de la matriz, es decir buscar el lugar más lejano al que se puede llegar
-desde esa posicion, era consiente de que usando un DFS o el algoritmo de Lee sería algo sencillo solo con investigar un poco y adaptar la idea conseguiria el resultado, pero decidi hacerlo
-con lo que sabía, asi que utilicé nuevamente bactracking para buscar de forma recursiva el camino más largo, la gracia me salio en acostarme a las 4 am :| pero se logró el resultado y ya tenia el punto mas lejano con estos métodos:
-```
+De esta forma se consigue generar el laberinto de forma aleatoria, abriendo caminos de forma recursiva y sin dejar zonas inaccesibles. Como quería una meta, no sabía dónde la iba a colocar ni dónde sería más conveniente hacerlo, por el simple hecho de que el laberinto siempre iba a ser diferente. Por lo que se me ocurrió que podía hacerlo buscando el camino más largo desde donde empieza el laberinto, que en este caso es la posición [1,1] de la matriz. Es decir, buscar el lugar más lejano al que se puede llegar desde esa posición. Era consciente de que usando un DFS o el algoritmo de Lee sería algo sencillo; solo con investigar un poco y adaptar la idea conseguiría el resultado. Pero decidí hacerlo con lo que sabía, así que utilicé nuevamente *backtracking* para buscar de forma recursiva el camino más largo. La gracia me salió en acostarme a las 4 a.m. :| pero se logró el resultado y ya tenía el punto más lejano con estos métodos.
+```csharp
 Cells LongestPath(Cell[,] maze) // código recursivo para determinar el camino mas largo del laberinto
     {
         int max = 0;
@@ -85,8 +74,10 @@ Cells LongestPath(Cell[,] maze) // código recursivo para determinar el camino m
         }
     }
 ```
-que como tal fue un poco de recursividad de pila pasando la referencia del camino mas largo que se consigue y actualizando el valor de la celda. Ya con todo esto quedaria la generacion de trampas que fue hecha de forma aleatoria recorriendo toda la matriz de celdas y por cada celda que fuese un camino tiene una posibilidad de un 20% de que se genere una trampa en ese camino cosa que fue bastante sencilla de implementar, al ser marcada la celda como trampa se llama a un metodo que decide de forma aleatoria que tipo de trampa es el que se va generar que son 4 tipos de trampas diferentes los que se encuentran implementados (*Congelacion*, *Sonmifero*, *Teletransporte al inicio* y *Espinas*), una vez generadas todas las trampas se generan de igual manera las botellas de energia que incrementan las velocidades de las fichas y por ultimo las zonas de teletransporte que se generan en las zonas sin salida que no son ni la meta ni la salida. Y donde se esta guardando toda esta informacion que si es trampa,zona de teletransporte ect... pues para eso existe una de las clases más importantes de todo el proyecto que es la clase celda la cual se muesta a continuacion con solamente sus propiedades:
-```
+Como tal, fue un poco de recursividad de pila, pasando la referencia del camino más largo que se consigue y actualizando el valor de la celda. Ya con todo esto, quedaría la generación de trampas, que fue hecha de forma aleatoria, recorriendo toda la matriz de celdas. Por cada celda que fuese un camino, tiene una posibilidad del 20% de que se genere una trampa en ese camino, cosa que fue bastante sencilla de implementar. Al ser marcada la celda como trampa, se llama a un método que decide de forma aleatoria qué tipo de trampa es la que se va a generar. Hay cuatro tipos de trampas diferentes que se encuentran implementadas: *Congelación*, *Somnífero*, *Teletransporte al inicio* y *Espinas*. Una vez generadas todas las trampas, se generan de igual manera las botellas de energía que incrementan las velocidades de las fichas. Por último, las zonas de teletransporte se generan en las zonas sin salida que no son ni la meta ni la salida. 
+
+¿Y dónde se está guardando toda esta información, que si es trampa, zona de teletransporte, etc.? Para eso existe una de las clases más importantes de todo el proyecto, que es la clase Celda(*class Cell*), la cual se muestra a continuación con solamente sus propiedades:
+```csharp
 public class Cell: ScriptableObject
 {
     public bool Obstacle = true;
@@ -110,9 +101,17 @@ public class Cell: ScriptableObject
 //hay mas metodos a continuacion..
 }
 ```
-Con esta clase tenemos todas las caracteristicas que tendran los objetos de tipo celda los cuales seran ScriptableObject para asignarle propiedades de forma mas comoda a los objetos en escena ahi se encuentran todos los parametros que pueden llegar a tener una celda y demas cositas para el sonido e imagenes entre otras cositas. Ya con todo esto hecho era momento de generar el laberinto en escena para eso use otro metodo que se encargaba de en correspondencia con las propiedades de las celdas generar el laberinto, esto se hacia instanciando unos prefab prefiajados para las celdas que se modifican segun sus propiedades y mientras se instanciaban todos estos prefab en la escena a su ves las referencias de estos se guardaban en una matriz estatica para que en los otros apartados del juego fuese mas comodo trabajar con las celdas. 
-Todo esto que se ha mencionado esta en la clase mas densa del proyecto y creo que ya deben tener una idea.... damas y caballeros con ustedes ```public class MazeGenerator : MonoBehaviour``` esta contiene todo lo necesario para generar el laberinto tanto los metodos anteriores como otros que la suplementan, a continucion se muestra un breve codigo de algunas de sus propiedades:
+Con esta clase tenemos todas las características que tendrán los objetos de tipo celda, los cuales serán *ScriptableObject* para asignarles propiedades de forma más cómoda a los objetos en escena. Ahí se encuentran todos los parámetros que pueden llegar a tener una celda, así como otros elementos para el sonido, imágenes, entre otras cosas. 
+
+Ya con todo esto hecho, era momento de generar el laberinto en escena. Para eso, usé otro método que se encargaba, en correspondencia con las propiedades de las celdas, de generar el laberinto. Esto se hacía instanciando unos prefabs predefinidos para las celdas, que se modifican según sus propiedades. Mientras se instanciaban todos estos prefabs en la escena, a su vez se guardaban las referencias de estos en una matriz estática para que en los otros apartados del juego fuese más cómodo trabajar con las celdas.
+
+Todo esto que se ha mencionado está en la clase más densa del proyecto, y creo que ya deben tener una idea... Damas y caballeros, con ustedes:
+
+```csharp
+public class MazeGenerator : MonoBehaviour
 ```
+Esta clase contiene todo lo necesario para generar el laberinto, tanto los métodos anteriores como otros que la suplementan. A continuación, se muestra un breve código de algunas de sus propiedades:
+```csharp
 public class MazeGenerator : MonoBehaviour
 {
     public GameObject CellObjectScene;
@@ -129,8 +128,8 @@ public class MazeGenerator : MonoBehaviour
 //En las restantes lineas estan los metodos... 
 }    
 ```
-Con la generacion del laberinto completada y todo lo relacionado con ella terminado ya en escena se tiene un laberinto con todo lo que se requiere para empezar a poner las fichas de los jugadores, para eso primeramente hay que manejar la logica de seleccion de fichas que en este caso tenemos 5 fichas para seleccionar por jugador para esto se utilizo una clase la cual se encargaria de gestionar todo lo relacionado con la seleccion de personajes y que despues de seleccionar los personajes guarda en una lista los que se seleccionaron por jugador, esta lista es estatica debido a que toda la informacion de los personajes seleccionados debe ser pasada a la clase *GameManager* para que gestione la lógica de las fichas en escena el código de la clase de que hablo es el siguiente: 
-```
+Con la generación del laberinto completada y todo lo relacionado con ella terminado, ya en escena se tiene un laberinto con todo lo que se requiere para empezar a poner las fichas de los jugadores. Para eso, primeramente hay que manejar la lógica de selección de fichas. En este caso, tenemos cinco fichas para seleccionar por jugador. Para esto, se utilizó una clase que se encargaría de gestionar todo lo relacionado con la selección de personajes y que, después de seleccionar los personajes, guarda en una lista los que se seleccionaron por jugador. Esta lista es estática debido a que toda la información de los personajes seleccionados debe ser pasada a la clase *GameManager*, para que gestione la lógica de las fichas en escena. El código de la clase de la que hablo es el siguiente:
+```csharp
 public class TeamManager : MonoBehaviour
 {
     //Scrip encargado de guardar y gestionar la información del menú de selección de personajes
@@ -145,8 +144,8 @@ public class TeamManager : MonoBehaviour
     bool[] presset = {false, false, false, false, false, false, false, false, false, false};
 //
 ```
-Los metodos que tiene la clase se encargan de que cuando se seleccione un personaje se agregue de forma inmediata a la lista. Pero... ¿que caracteristicas tiene las fichas :( ? pues para saber eso tenemos que adentrarnos en otra de las clases principales de este proyecto la clase *Token* que es la que guarda las caracteristicas principales de las fichas en sus propedades y de la cual se muestra un fragmento de codigo a continuacion:
-```
+Los métodos que tiene la clase se encargan de que, cuando se seleccione un personaje, se agregue de forma inmediata a la lista. Pero... ¿qué características tienen las fichas? :( Para saber eso, tenemos que adentrarnos en otra de las clases principales de este proyecto: la clase *Token*, que es la que guarda las características principales de las fichas en sus propiedades. A continuación, se muestra un fragmento de código de la misma:
+```csharp
 public class Token : ScriptableObject
 {
     //Clase encargadad de la informacion de la ficha
@@ -165,8 +164,8 @@ public class Token : ScriptableObject
     public int CurrentSpeed;
     public int CurrentCooldown;
 ```
-es importante aclarar que en este fragmento no se encuentra todo lo que realmente tiene pero si lo mas fundamental, esta clase complarte la caracteristica que tiene la clase *Cell* de heredar de **Scriptable Object** ya que las fichas son objetos en escenas que requieren de varias propiedades. Con todo el tema de las fichas controlado es momento de crear los jugadores, y para ello necesitamos tener las caracteristicas de los jugadores, y de esto se encarga la clase *Player* que ademas de sus propiedades contiene varios metodos muy utiles para el control de las caracteristicas y recursos que contiene cada jugador :
-```
+Es importante aclarar que en este fragmento no se encuentra todo lo que realmente tiene, pero sí lo más fundamental. Esta clase comparte la característica que tiene la clase *Cell* de heredar de **Scriptable Object**, ya que las fichas son objetos en escena que requieren de varias propiedades. Con todo el tema de las fichas controlado, es momento de crear los jugadores. Para ello, necesitamos tener las características de los jugadores, y de esto se encarga la clase *Player*, que además de sus propiedades, contiene varios métodos muy útiles para el control de las características y recursos que contiene cada jugador:
+```csharp
 public class Player : MonoBehaviour
 {
     public string Name;
@@ -209,12 +208,12 @@ public class Player : MonoBehaviour
 // Resto de metodos a continuacion
 }
 ```
-en esta clase como se puede ver se almacenan las fichas que posee cada jugador actualmente y asi como la referencia de las mismas en la lista *ObjectsInMaze* esta clase es uno de los complementos principales para la logica del juego, y en ella se encuentra el metodo que permite que se instancien las fichas en escena que como el nombre lo indica se llama *InstantiateTokens*.
+En esta clase, como se puede ver, se almacenan las fichas que posee cada jugador actualmente, así como la referencia de las mismas en la lista *ObjectsInMaze*. Esta clase es uno de los complementos principales para la lógica del juego, y en ella se encuentra el método que permite que se instancien las fichas en escena, que, como el nombre lo indica, se llama *InstantiateTokens*.
 
 ## El desplazamiento
 
-Las fichas se mueven utilizando las teclas W A S D para moverse en el laberinto hacia arriba, izquierda, abajo y derecha respectivamente para eso lo fundamental es verificar si no hay una pared y de ser asi moverse aun tambien hay que tener en cuenta si la ficha tiene la energia(velocidad) suficiente para seguir moviendose entre otras cosas y para conseguir todo esto se le asigna el scrip de movimiento que se va a mostrar a continucion al prefab de las fichas para que tenga la capacidad de desplazarse por la matriz de objetos referenciada en la clase *Maze Generator* :
-```
+Las fichas se mueven utilizando las teclas W, A, S y D para moverse en el laberinto hacia arriba, izquierda, abajo y derecha, respectivamente. Para eso, lo fundamental es verificar si no hay una pared y, de ser así, moverse. También hay que tener en cuenta si la ficha tiene la energía (velocidad) suficiente para seguir moviéndose, entre otras cosas. Para conseguir todo esto, se le asigna el script de movimiento, que se va a mostrar a continuación, al prefab de las fichas para que tenga la capacidad de desplazarse por la matriz de objetos referenciada en la clase *Maze Generator*:
+```csharp
 public class TokenMove : MonoBehaviour
 {
     public GameObject CurrentToken;
@@ -250,16 +249,26 @@ public class TokenMove : MonoBehaviour
     }
 }
 ```
-este script es ademas de el movimiento una vez este es efectuado verifica si el lugar a donde se movio es una trampa, zona de teletransporte, botella de energia o incluso la meta y maneja la logica de estos.
+Este script, además del movimiento, una vez que este es efectuado, verifica si el lugar al que se movió es una trampa, zona de teletransporte, botella de energía o incluso la meta, y maneja la lógica de estos.
 
 ## Las habilidades de las fichas y las trampas
 
-Tanto en la clase *Token* como en la clase *Cell* se encuentra un delegado el cual se encarga de almacenar un metodo estatico que se corresponde con las habilidades de cada ficha y de la funcionalidad de cada celda respectivamente, al ser activada una habilidad o una trampa se llamaran a estos metodos por lo que con esa idea fue mas facil manejar la logica de efectos en el juego. La clase estatica *TokenSkill* es la que contiene los 7 metodos estaticos de las de las fichas que controlan sus habilidades ademas de metodos auxiliares y la clase estatica *TrampEffects* es la encargada de manejar la logica de las 5 trampas que de ellas el teletransporte fue agregada a esta clase ya que me ahorraba muchas cosas la puse como si fuera un caso particular de trampa. Los delegados se encuentran en las clases *Token* y *Cell* mencionadas anteriormente.
+Tanto en la clase *Token* como en la clase *Cell* se encuentra un delegado, el cual se encarga de almacenar un método estático que se corresponde con las habilidades de cada ficha y con la funcionalidad de cada celda, respectivamente. Al ser activada una habilidad o una trampa, se llamarán a estos métodos, por lo que con esa idea fue más fácil manejar la lógica de efectos en el juego. 
+
+La clase estática *TokenSkill* es la que contiene los 7 métodos estáticos de las fichas que controlan sus habilidades, además de métodos auxiliares. La clase estática *TrapEffects* es la encargada de manejar la lógica de las 5 trampas; de ellas, el teletransporte fue agregado a esta clase, ya que me ahorraba muchas cosas, y la puse como si fuera un caso particular de trampa. Los delegados se encuentran en las clases *Token* y *Cell* mencionadas anteriormente.
 
 ## La clase GameManager
 
-Con todos los pilares del juego listo es momento de hablar de la clase encargada de gestionar la logica del juego la clase *GameManager* esta se divide en varias secciones segun los momentos del juego. Al iniciar lo primero seria seleccionar la ficha para eso contamos con un boton que casualmete se llama *Seleccionar Ficha* en la clase implemente un metodo que lo que hacia era activar un panel que estaba previamente creado y dentro de el instanciar las fichas para seleccionar una para empezar a moverla y una vez seleccionada apretar el boton de confirmar y salir, que facil suena, la gracia me costo 3 dias XD, pero lo que hice fue inventarme unos botones que fueron los que se iban a instanciar en el panel y a estos asignarles la logica al presionarlos algo extremadamente complejo y con un codigo relativamente extenso que pueden leer en el repositorio como tal pero con eso se consigue que al apretar una ficha esta se muestre en escena (cabe aclarar que desde que empieza el juego todas las fichas estan instanciadas en la escena cortecia de la clase *Player*), y ademas sea desplazable si la situacion lo permite. La otra parte seria la logica de turnos que no es muy complicada solamente activa el boton de seleccionar ficha pero las fichas que salen son las del otro jugador y de igual forma hace lo mismo, en esta clase ademas se maneja la logica de todos los botones de la escena principal del que podemos destacar el boton de la habilidad el cual se encarga de llamar al metodo *ActivateSkillToken* que es el que permite activar la habildad de la ficha si tiene cooldown disponible. En el metodo Start se asignan valores indispesables a propiedades de la clase para el correcto funcionamiento del juego asi como la instaciacion inicial de todas las fichas de ambos jugadores pero desactivadas, en las propiedades directamente se le asigna a cada jugador lo que venia de la clase *TeamManager*, el metodo *Update* se encarga de comprobar la cantidad de fichas de cada jugador en la meta para en caso de que esten todas marcar al jugador como ganador y finalizar el juego. A continuacion se muestra un breve resumen del codigo de esta clase:
-```
+Con todos los pilares del juego listos, es momento de hablar de la clase encargada de gestionar la lógica del juego: la clase *GameManager*. Esta se divide en varias secciones según los momentos del juego. Al iniciar, lo primero sería seleccionar la ficha; para eso contamos con un botón que casualmente se llama *Seleccionar Ficha*. En la clase implementé un método que lo que hacía era activar un panel que estaba previamente creado y, dentro de él, instanciar las fichas para seleccionar una y empezar a moverla. Una vez seleccionada, se debe apretar el botón de confirmar y salir. Que fácil suena, pero me costó 3 días XD. 
+
+Lo que hice fue inventarme unos botones que se iban a instanciar en el panel y a estos asignarles la lógica al presionarlos, algo extremadamente complejo y con un código relativamente extenso que pueden leer en el repositorio. Con esto se consigue que al apretar una ficha, esta se muestre en escena (cabe aclarar que desde que empieza el juego todas las fichas están instanciadas en la escena gracias a la clase *Player*), y además sea desplazable si la situación lo permite.
+
+La otra parte sería la lógica de turnos, que no es muy complicada; simplemente activa el botón de seleccionar ficha, pero las fichas que salen son las del otro jugador y hace lo mismo. En esta clase, además, se maneja la lógica de todos los botones de la escena principal, del que podemos destacar el botón de la habilidad, el cual se encarga de llamar al método *ActivateSkillToken*, que permite activar la habilidad de la ficha si tiene cooldown disponible.
+
+En el método `Start`, se asignan valores indispensables a propiedades de la clase para el correcto funcionamiento del juego, así como la instanciación inicial de todas las fichas de ambos jugadores, pero desactivadas. En las propiedades, directamente se le asigna a cada jugador lo que venía de la clase *TeamManager*. El método `Update` se encarga de comprobar la cantidad de fichas de cada jugador en la meta para, en caso de que estén todas, marcar al jugador como ganador y finalizar el juego. 
+
+A continuación, se muestra un breve resumen del código de esta clase:
+```csharp
 public class GameManager : MonoBehaviour
 {
     public GameObject TonkenInScene; // Referencia a el prefab de la ficha
@@ -294,21 +303,29 @@ public class GameManager : MonoBehaviour
 
 ### Conclusiones y Agradecimientos
 
-Todo esto es el resultado de algunas noches sin dormir y unos cuantos dias dedicandole el tiempo necesario sin dejar de lado las 200 mil cosas que uno tiene arriba siempre como todos, al final no se ni como pero lo puede terminar bastante rapido y sin mucho trabajo pero eso no quita que fue un reto increible, el hecho de instanciar botones por poner un ejemplo era algo que ni creia posible, y fue una lucha constante. Las ideas me escaseaban pero con los comentarios de algunos de mis compañeros pude mejorar algunas cositas y el resultado final es bastante decente, siento que incluso pudo ser mejor pero no puedo pedir mas. Me gustaria agradecerle a *Manuel (El Tanke)* , *Elizabeth* , *Julio* que me dieron ideas bastante utiles al hablar con ellos y explicarles muchas cosas, tambien a *Cristian* que me dio ideas bastante geniales ademas de que fue uno de los beta tester y a la Fan número uno de mi juego que no le pude ganar ni una sola vez y que me ayudo a encontrar los bugs finales asi como las mejoras extras en el apartado audiovisual, mi novia *Laura* (me ganó 3 veces seguidas XD), despues de todo estos meses el resultado en parte tambien se lo debo a todos ellos.
+Todo esto es el resultado de algunas noches sin dormir y unos cuantos días dedicándole el tiempo necesario, sin dejar de lado las 200 mil cosas que uno tiene siempre, como todos. Al final, no sé ni cómo, pero logré terminarlo bastante rápido y sin mucho trabajo, aunque eso no quita que fue un reto increíble. El hecho de instanciar botones, por poner un ejemplo, era algo que ni creía posible, y fue una lucha constante.
+
+Las ideas me escaseaban, pero con los comentarios de algunos de mis compañeros pude mejorar algunas cosas y el resultado final es bastante decente. Siento que incluso pudo ser mejor, pero no puedo pedir más. Me gustaría agradecerle a *Manuel (El Tanke)*, *Elizabeth*, *Julio*, que me dieron ideas bastante útiles al hablar con ellos y explicarles muchas cosas. También a *Cristian*, que me dio ideas geniales y fue uno de los beta testers, y a la fan número uno de mi juego, que no le pude ganar ni una sola vez y que me ayudó a encontrar los bugs finales, así como las mejoras extras en el apartado audiovisual: mi novia *Laura* (me ganó 3 veces seguidas XD). Después de todos estos meses, el resultado en parte también se lo debo a todos ellos.
 
 ### Como Jugar
 
-Una vez ejecutado el juego aparecera un menu sencillo que lo unico que tendran que hacer es apretar el boton de jugar y a continuacion saldra la escena de seleccion de personajes, una vez ahi los jugadores podran poner su nombre encima del panel de personajes que decidan, cabe aclarar que cada jugador tendra solamente las fichas asociadas a su panel disponibles y que al seleccionarlas el marco se pondra en dorado, para iniciar el juego deberan apretar en confirmar teniendo la misma cantidad de fichas cada jugador. Al entrar al juego se encontrar con el laberinto en el centro y 2 botones en la parte superir izquierda de la pantalla los cuales son los del cambio de turno y seleccion de ficha, al apretar el boton de selecionar ficha saldra un panel de selecion con las fichas disponibles, se le debe hacer clic a la ficha que se desea usar y a continuacion apretar el boton de confirmar. Si la ficha no tiene cooldow tendra el boton de Habilidad disponible y con apretarlo la ficha usará su habilidad, para moverse debera apretar las teclas W A S D como es utilizado comunmente y el objetivo sera llegar a la celda roja que es la meta, en el laberinto hay trampas exparsidas pero no visibles y hay un 20 % de posibilidades de caer en una, tambien estan las botellas de energia  que aumentan la estamina de la ficha en 3, y en las zonas sin salidas se encuentran las zonas de teletransporte que te envian a una zona de teletransporte aleatoria incluyendo la misma en la que se entra. Cuando todas las fichas del jugador logren llegar al final, el jugador sera declarado ganador. En la parte inferior se muestra un contador de las fichas en la meta actualmente. Con todo esto lo unico que le vendria quedando seria instalarlo.
+Una vez ejecutado el juego, aparecerá un menú sencillo en el que lo único que tendrán que hacer es apretar el botón de jugar. A continuación, saldrá la escena de selección de personajes. Una vez ahí, los jugadores podrán poner su nombre encima del panel de personajes que decidan. Cabe aclarar que cada jugador tendrá solamente las fichas asociadas a su panel disponibles, y que al seleccionarlas, el marco se pondrá en dorado. Para iniciar el juego, deberán apretar en confirmar teniendo la misma cantidad de fichas cada jugador.
 
-### Instalacion y Links de Descarga
+Al entrar al juego, se encontrarán con el laberinto en el centro y dos botones en la parte superior izquierda de la pantalla, los cuales son los del cambio de turno y selección de ficha. Al apretar el botón de seleccionar ficha, saldrá un panel de selección con las fichas disponibles. Se le debe hacer clic a la ficha que se desea usar y, a continuación, apretar el botón de confirmar. Si la ficha no tiene cooldown, tendrá el botón de habilidad disponible y, al apretarlo, la ficha usará su habilidad.
 
-Para instalar el juego se deben seguir los siguientes pasos una vez descargado el archivo.rar que aparece al final:
+Para moverse, deberán apretar las teclas W, A, S y D, como es utilizado comúnmente, y el objetivo será llegar a la celda roja, que es la meta. En el laberinto hay trampas esparcidas, pero no visibles, y hay un 20% de posibilidades de caer en una. También están las botellas de energía, que aumentan la estamina de la ficha en 3. En las zonas sin salidas se encuentran las zonas de teletransporte, que te envían a una zona de teletransporte aleatoria, incluyendo la misma en la que se entra.
 
-- Descomprimir el rar.
-- Ejecutar el Icono en Rojo que tiene el nombre del proyecto
-- Por ultimo... a jugar :)
+Cuando todas las fichas del jugador logren llegar al final, el jugador será declarado ganador. En la parte inferior se muestra un contador de las fichas en la meta actualmente. Con todo esto, lo único que quedaría sería instalarlo.
 
-Para descagar el archivo del juego (archivo.rar) debera hacer click [Aquí](https://github.com/Kaik0405/Maze_Runners/releases/download/v1.0/Maze_Runners_Version.1.0.rar)  
+### Instalación y Links de Descarga
+
+Para instalar el juego se deben seguir los siguientes pasos una vez descargado el archivo .rar que aparece al final:
+
+- Descomprimir el .rar.
+- Ejecutar el ícono en rojo que tiene el nombre del proyecto.
+- Por último... ¡a jugar! :)
+
+Para descargar el archivo del juego (archivo .rar) deberá hacer clic [Aquí](https://github.com/Kaik0405/Maze_Runners/releases/download/v1.0/Maze_Runners_Version.1.0.rar).
 
 
 
